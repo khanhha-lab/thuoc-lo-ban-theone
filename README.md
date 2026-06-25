@@ -12,7 +12,9 @@ Người dùng nhập kích thước (mm / cm / m), công cụ cho biết kích 
 - Thước trực quan tô màu đỏ/đen, có con trỏ chỉ vị trí số đo.
 - Tự gợi ý kích thước đẹp gần nhất khi kết quả là cung xấu.
 - Đổi đơn vị mm / cm / m, giữ nguyên kích thước thực.
-- **1 file `index.html` độc lập** — không phụ thuộc thư viện, dễ nhúng vào website.
+- **`index.html`** gọn nhẹ, không phụ thuộc framework (chỉ dùng font Mulish từ Google Fonts) + ảnh `logo.png`. Dễ nhúng vào website.
+- Màu chủ đạo theo nhận diện Nội Thất The One (**#004ea8**), font **Mulish**.
+- Mục nội dung giới thiệu: thước lỗ ban là gì, ý nghĩa phong thủy, ứng dụng và cách sử dụng (tốt cho SEO).
 
 ## Cách dùng / Tích hợp
 

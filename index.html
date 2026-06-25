@@ -5,21 +5,26 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Thước Lỗ Ban Online | Nội Thất The One</title>
 <meta name="description" content="Công cụ tra cứu thước lỗ ban online chuẩn phong thủy của Nội Thất The One. Đo kích thước nội thất, cửa, bàn thờ theo các cung tốt - xấu (52.2cm, 42.9cm, 38.8cm).">
+<link rel="icon" href="logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#f6f1e9;
+    --bg:#eef3fa;
     --panel:#ffffff;
-    --ink:#241b14;
-    --muted:#7a6c5d;
-    --line:#e7ddcf;
-    --brand:#8a1c1c;       /* đỏ trầm - The One */
-    --brand-2:#b8893f;     /* vàng đồng */
+    --ink:#102036;
+    --muted:#5f6e82;
+    --line:#dde6f1;
+    --brand:#004ea8;       /* xanh logo The One */
+    --brand-dark:#003d85;
+    --brand-2:#c8922e;     /* vàng đồng - điểm nhấn */
     --good:#c0392b;        /* cung tốt (đỏ) */
     --good-bg:#fdecea;
     --bad:#2b2b2b;         /* cung xấu (đen) */
     --bad-bg:#ecebea;
     --radius:14px;
-    --shadow:0 10px 30px rgba(60,40,20,.10);
+    --shadow:0 10px 30px rgba(0,40,90,.10);
     font-synthesis:none;
   }
   *{box-sizing:border-box}
@@ -27,8 +32,8 @@
   body{
     background:var(--bg);
     color:var(--ink);
-    font-family:"Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
-    line-height:1.55;
+    font-family:"Mulish","Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+    line-height:1.6;
     -webkit-font-smoothing:antialiased;
   }
   a{color:var(--brand)}
@@ -36,17 +41,12 @@
 
   /* Header */
   header.site{
-    background:linear-gradient(180deg,#fff,#fbf6ee);
+    background:linear-gradient(180deg,#fff,#f2f7fc);
     border-bottom:1px solid var(--line);
   }
   .topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 16px;max-width:960px;margin:0 auto}
-  .brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit}
-  .brand .logo{
-    width:44px;height:44px;border-radius:11px;flex:none;
-    background:var(--brand);color:#fff;display:grid;place-items:center;
-    font-weight:800;font-size:18px;letter-spacing:.5px;
-    box-shadow:inset 0 0 0 2px rgba(255,255,255,.15);
-  }
+  .brand{display:flex;align-items:center;gap:13px;text-decoration:none;color:inherit}
+  .brand .logo{height:46px;width:auto;flex:none;display:block;border-radius:6px}
   .brand b{display:block;font-size:16px;letter-spacing:.3px}
   .brand small{display:block;color:var(--muted);font-size:11.5px;text-transform:uppercase;letter-spacing:.14em}
   .topbar .back{font-size:13px;color:var(--muted);text-decoration:none}
@@ -67,7 +67,7 @@
   .num-wrap:focus-within{border-color:var(--brand-2)}
   .num-wrap input{flex:1;border:0;outline:0;font-size:22px;font-weight:700;padding:12px 14px;background:transparent;color:var(--ink);width:100%;min-width:0}
   .unit-toggle{display:flex;border-left:1px solid var(--line)}
-  .unit-toggle button{border:0;background:#faf6ef;color:var(--muted);font-weight:700;font-size:13px;padding:0 13px;cursor:pointer;transition:.12s}
+  .unit-toggle button{border:0;background:#eef4fb;color:var(--muted);font-weight:700;font-size:13px;padding:0 13px;cursor:pointer;transition:.12s}
   .unit-toggle button+button{border-left:1px solid var(--line)}
   .unit-toggle button[aria-pressed="true"]{background:var(--brand);color:#fff}
   .hint{font-size:12.5px;color:var(--muted);margin-top:8px}
@@ -75,7 +75,7 @@
   /* Results */
   #results{margin-top:8px}
   .ruler-block{margin-top:18px;overflow:hidden}
-  .ruler-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:15px 18px;border-bottom:1px solid var(--line);background:#fcf8f1;flex-wrap:wrap}
+  .ruler-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:15px 18px;border-bottom:1px solid var(--line);background:#f4f8fd;flex-wrap:wrap}
   .ruler-title b{font-size:16px}
   .ruler-title span{color:var(--muted);font-size:13px}
   .verdict{display:inline-flex;align-items:center;gap:8px;font-weight:800;font-size:14px;padding:7px 14px;border-radius:999px;white-space:nowrap}
@@ -85,10 +85,10 @@
 
   .ruler-body{padding:16px 18px}
   .meta-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:14px}
-  .meta-grid .mi{background:#faf7f1;border:1px solid var(--line);border-radius:11px;padding:10px 12px}
+  .meta-grid .mi{background:#f4f8fd;border:1px solid var(--line);border-radius:11px;padding:10px 12px}
   .meta-grid .mi i{font-style:normal;display:block;font-size:11.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px}
   .meta-grid .mi b{font-size:15px}
-  .meaning{font-size:14px;color:#3c3027;background:#fffdf9;border-left:3px solid var(--brand-2);padding:10px 14px;border-radius:0 8px 8px 0}
+  .meaning{font-size:14px;color:#2a3b54;background:#f7fafe;border-left:3px solid var(--brand-2);padding:10px 14px;border-radius:0 8px 8px 0}
 
   /* Visual ruler */
   .scale{margin-top:16px}
@@ -105,7 +105,7 @@
 
   /* Suggestions */
   .suggest{margin-top:14px;font-size:13.5px}
-  .suggest .ttl{font-weight:700;margin-bottom:8px;color:#3c3027}
+  .suggest .ttl{font-weight:700;margin-bottom:8px;color:#2a3b54}
   .chips{display:flex;flex-wrap:wrap;gap:8px}
   .chip{border:1.5px solid var(--good);color:var(--good);background:var(--good-bg);border-radius:9px;padding:6px 11px;font-weight:700;cursor:pointer;font-size:13px;transition:.12s}
   .chip:hover{background:var(--good);color:#fff}
@@ -119,7 +119,20 @@
   .info-grid h3{margin:0 0 6px;font-size:15px;color:var(--brand)}
   .info-grid p{margin:0;font-size:13.5px;color:var(--muted)}
 
-  footer.site{border-top:1px solid var(--line);margin-top:30px;padding:22px 0;color:var(--muted);font-size:13px;background:#fbf6ee}
+  /* Article */
+  .article{margin:34px 0 8px}
+  .article-card{padding:24px 26px}
+  .article h2{font-size:21px;margin:24px 0 10px;color:var(--brand);letter-spacing:-.3px}
+  .article h2:first-child{margin-top:0}
+  .article h3{font-size:16px;margin:18px 0 5px;color:var(--ink)}
+  .article p{margin:0 0 12px;color:#33425a;font-size:15px}
+  .article ul{margin:0 0 14px;padding-left:20px;color:#33425a;font-size:15px}
+  .article li{margin:5px 0}
+  .article .lead{font-size:16px;color:var(--ink)}
+  .note{background:#e9f1fc;border:1px solid #cfe0f4;border-left:4px solid var(--brand);border-radius:0 10px 10px 0;padding:13px 16px;font-size:14.5px;color:#2a3b54;margin:16px 0 2px}
+  @media (max-width:560px){ .article-card{padding:18px 16px} }
+
+  footer.site{border-top:1px solid var(--line);margin-top:30px;padding:22px 0;color:var(--muted);font-size:13px;background:#f2f7fc}
   footer .wrap{display:flex;flex-wrap:wrap;gap:8px;justify-content:space-between;align-items:center}
   .disclaimer{font-size:12px;color:var(--muted);margin-top:10px;font-style:italic}
 
@@ -134,7 +147,7 @@
 <header class="site">
   <div class="topbar">
     <a class="brand" href="https://noithattheone.vn/" target="_blank" rel="noopener">
-      <span class="logo">T1</span>
+      <img class="logo" src="logo.png" alt="Nội Thất The One" width="95" height="46">
       <span>
         <b>Nội Thất The One</b>
         <small>Thước Lỗ Ban Online</small>
@@ -186,6 +199,43 @@
       </div>
     </div>
     <p class="disclaimer">* Quy ước màu: cung đỏ là cát lợi (nên chọn), cung đen là hung (nên tránh). Màu sắc xác định theo cung lớn; kết quả hiển thị kèm tên phân cung và ý nghĩa. Công cụ mang tính tham khảo phong thủy.</p>
+  </section>
+
+  <section class="article">
+    <div class="card article-card">
+      <h2>Thước lỗ ban là gì?</h2>
+      <p class="lead">Thước lỗ ban là loại thước phong thủy dùng để đo đạc và lựa chọn kích thước cát lợi trong xây dựng, làm nhà và đóng đồ nội thất. Tương truyền thước do <strong>Lỗ Ban</strong> — ông tổ nghề mộc và nghề xây dựng của Trung Hoa cổ đại — sáng tạo ra, nên được gọi theo tên ông.</p>
+      <p>Trên thước, mỗi chu kỳ được chia thành nhiều cung, mỗi cung mang một ý nghĩa cát (tốt) hoặc hung (xấu) và được phân biệt bằng màu sắc: <strong style="color:var(--good)">cung đỏ là tốt</strong> — nên chọn; <strong>cung đen là xấu</strong> — nên tránh. Khi kích thước rơi vào cung đỏ, gia chủ được cho là sẽ gặp nhiều may mắn, tài lộc và bình an.</p>
+
+      <h2>Ý nghĩa của thước lỗ ban trong phong thủy</h2>
+      <p>Theo quan niệm phong thủy phương Đông, kích thước các bộ phận trong ngôi nhà và đồ vật có ảnh hưởng đến vận khí của gia chủ. Một kích thước "đẹp" không chỉ hài hòa về thẩm mỹ mà còn được tin là thu hút năng lượng tích cực, mang lại:</p>
+      <ul>
+        <li><strong>Tài lộc, thịnh vượng</strong> — công việc làm ăn thuận lợi, tiền của dồi dào.</li>
+        <li><strong>Sức khỏe, bình an</strong> — hạn chế ốm đau, tai ương cho các thành viên trong nhà.</li>
+        <li><strong>Công danh, học hành</strong> — con cháu đỗ đạt, sự nghiệp hanh thông.</li>
+        <li><strong>Hòa thuận gia đạo</strong> — gia đình êm ấm, trên dưới thuận hòa.</li>
+      </ul>
+      <p>Vì vậy, từ xưa các nghệ nhân mộc và thợ xây luôn dùng thước lỗ ban để "chọn số đẹp" khi thi công cửa, bàn thờ, giường, tủ và nhiều hạng mục khác.</p>
+
+      <h2>Ứng dụng của thước lỗ ban</h2>
+      <p>Có ba loại thước lỗ ban phổ biến, mỗi loại dùng cho một nhóm đối tượng đo khác nhau:</p>
+      <h3>1. Thước 52.2cm — Khối thông thủy (khoảng rỗng)</h3>
+      <p>Dùng để đo các khoảng rỗng/lọt lòng như cửa đi, cửa sổ, cổng, ô thoáng, giếng trời — những vị trí liên quan trực tiếp đến luồng khí ra vào nhà.</p>
+      <h3>2. Thước 42.9cm — Khối dương trạch (khối đặc)</h3>
+      <p>Dùng cho các khối xây dựng đặc của nhà ở: bệ bếp, bậc thang, bệ thờ xây, móng và kích thước các khối xây.</p>
+      <h3>3. Thước 38.8cm — Đồ nội thất &amp; âm phần</h3>
+      <p>Dùng để đo đồ nội thất như bàn, ghế, tủ, giường, kệ và bàn thờ. <strong>Đây là loại thước sát nhất với các sản phẩm của Nội Thất The One</strong> — khi đặt đóng bàn ghế, tủ kệ, gia chủ nên ưu tiên các kích thước rơi vào cung đỏ của thước này.</p>
+
+      <h2>Cách sử dụng thước lỗ ban</h2>
+      <p>Với công cụ tra cứu online phía trên, bạn chỉ cần làm theo các bước sau:</p>
+      <ul>
+        <li><strong>Bước 1:</strong> Chọn đơn vị (mm, cm hoặc m) và nhập kích thước thực tế cần kiểm tra.</li>
+        <li><strong>Bước 2:</strong> Xem kết quả trên cả ba loại thước. Mỗi thước hiển thị cung lớn, phân cung và đánh giá <strong style="color:var(--good)">Tốt (đỏ)</strong> hay <strong>Xấu (đen)</strong> kèm ý nghĩa.</li>
+        <li><strong>Bước 3:</strong> Ưu tiên loại thước phù hợp với hạng mục đang đo (ví dụ đồ nội thất → xem thước 38.8cm).</li>
+        <li><strong>Bước 4:</strong> Nếu kích thước rơi vào cung xấu, bấm vào gợi ý <strong>"Kích thước đẹp gần nhất"</strong> để chọn số đo cát lợi gần với mong muốn của bạn.</li>
+      </ul>
+      <div class="note"><strong>Lưu ý khi áp dụng:</strong> Nên tập trung vào các kích thước quan trọng (cửa chính, bàn thờ, giường ngủ, bàn làm việc) thay vì áp dụng máy móc cho mọi chi tiết. Với cửa, hãy đo khoảng thông thủy (lọt lòng) chứ không đo phủ bì. Thước lỗ ban mang tính tham khảo phong thủy — nên cân bằng cùng công năng và thẩm mỹ thực tế.</div>
+    </div>
   </section>
 </main>
 
