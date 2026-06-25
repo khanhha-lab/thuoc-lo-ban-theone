@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thước Lỗ Ban Online | Nội Thất The One</title>
+<meta name="description" content="Công cụ tra cứu thước lỗ ban online chuẩn phong thủy của Nội Thất The One. Đo kích thước nội thất, cửa, bàn thờ theo các cung tốt - xấu (52.2cm, 42.9cm, 38.8cm).">
+<style>
+  :root{
+    --bg:#f6f1e9;
+    --panel:#ffffff;
+    --ink:#241b14;
+    --muted:#7a6c5d;
+    --line:#e7ddcf;
+    --brand:#8a1c1c;       /* đỏ trầm - The One */
+    --brand-2:#b8893f;     /* vàng đồng */
+    --good:#c0392b;        /* cung tốt (đỏ) */
+    --good-bg:#fdecea;
+    --bad:#2b2b2b;         /* cung xấu (đen) */
+    --bad-bg:#ecebea;
+    --radius:14px;
+    --shadow:0 10px 30px rgba(60,40,20,.10);
+    font-synthesis:none;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:"Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--brand)}
+  .wrap{max-width:960px;margin:0 auto;padding:0 16px}
+
+  /* Header */
+  header.site{
+    background:linear-gradient(180deg,#fff,#fbf6ee);
+    border-bottom:1px solid var(--line);
+  }
+  .topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 16px;max-width:960px;margin:0 auto}
+  .brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit}
+  .brand .logo{
+    width:44px;height:44px;border-radius:11px;flex:none;
+    background:var(--brand);color:#fff;display:grid;place-items:center;
+    font-weight:800;font-size:18px;letter-spacing:.5px;
+    box-shadow:inset 0 0 0 2px rgba(255,255,255,.15);
+  }
+  .brand b{display:block;font-size:16px;letter-spacing:.3px}
+  .brand small{display:block;color:var(--muted);font-size:11.5px;text-transform:uppercase;letter-spacing:.14em}
+  .topbar .back{font-size:13px;color:var(--muted);text-decoration:none}
+  .topbar .back:hover{color:var(--brand)}
+
+  /* Hero */
+  .hero{padding:30px 0 8px}
+  .hero h1{font-size:clamp(24px,4.5vw,34px);margin:0 0 8px;letter-spacing:-.5px}
+  .hero p{margin:0;color:var(--muted);max-width:62ch}
+
+  /* Input card */
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+  .input-card{padding:20px;margin-top:20px}
+  .input-row{display:flex;flex-wrap:wrap;gap:14px;align-items:flex-end}
+  .field{flex:1 1 220px;min-width:200px}
+  label.lbl{display:block;font-size:12.5px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:7px}
+  .num-wrap{display:flex;align-items:stretch;border:1.5px solid var(--line);border-radius:11px;overflow:hidden;background:#fff;transition:border-color .15s}
+  .num-wrap:focus-within{border-color:var(--brand-2)}
+  .num-wrap input{flex:1;border:0;outline:0;font-size:22px;font-weight:700;padding:12px 14px;background:transparent;color:var(--ink);width:100%;min-width:0}
+  .unit-toggle{display:flex;border-left:1px solid var(--line)}
+  .unit-toggle button{border:0;background:#faf6ef;color:var(--muted);font-weight:700;font-size:13px;padding:0 13px;cursor:pointer;transition:.12s}
+  .unit-toggle button+button{border-left:1px solid var(--line)}
+  .unit-toggle button[aria-pressed="true"]{background:var(--brand);color:#fff}
+  .hint{font-size:12.5px;color:var(--muted);margin-top:8px}
+
+  /* Results */
+  #results{margin-top:8px}
+  .ruler-block{margin-top:18px;overflow:hidden}
+  .ruler-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:15px 18px;border-bottom:1px solid var(--line);background:#fcf8f1;flex-wrap:wrap}
+  .ruler-title b{font-size:16px}
+  .ruler-title span{color:var(--muted);font-size:13px}
+  .verdict{display:inline-flex;align-items:center;gap:8px;font-weight:800;font-size:14px;padding:7px 14px;border-radius:999px;white-space:nowrap}
+  .verdict.good{color:#fff;background:var(--good)}
+  .verdict.bad{color:#fff;background:var(--bad)}
+  .verdict .dot{width:8px;height:8px;border-radius:50%;background:currentColor;opacity:.85}
+
+  .ruler-body{padding:16px 18px}
+  .meta-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:14px}
+  .meta-grid .mi{background:#faf7f1;border:1px solid var(--line);border-radius:11px;padding:10px 12px}
+  .meta-grid .mi i{font-style:normal;display:block;font-size:11.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px}
+  .meta-grid .mi b{font-size:15px}
+  .meaning{font-size:14px;color:#3c3027;background:#fffdf9;border-left:3px solid var(--brand-2);padding:10px 14px;border-radius:0 8px 8px 0}
+
+  /* Visual ruler */
+  .scale{margin-top:16px}
+  .scale-track{position:relative;display:flex;border-radius:9px;overflow:hidden;border:1px solid var(--line);height:62px}
+  .seg{position:relative;display:flex;align-items:center;justify-content:center;text-align:center;color:#fff;font-size:11px;font-weight:700;padding:2px;line-height:1.15;overflow:hidden;border-right:1px solid rgba(255,255,255,.18)}
+  .seg:last-child{border-right:0}
+  .seg.good{background:linear-gradient(180deg,#d24a3b,#b5301f)}
+  .seg.bad{background:linear-gradient(180deg,#3a3a3a,#222)}
+  .seg.active{outline:3px solid var(--brand-2);outline-offset:-3px;z-index:2}
+  .seg small{opacity:.75;font-weight:600;display:block;font-size:9.5px}
+  .marker{position:absolute;top:-6px;bottom:-6px;width:2px;background:#1f6feb;z-index:5;pointer-events:none}
+  .marker::before{content:"";position:absolute;top:-7px;left:50%;transform:translateX(-50%);border:6px solid transparent;border-top-color:#1f6feb}
+  .scale-cap{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-top:6px}
+
+  /* Suggestions */
+  .suggest{margin-top:14px;font-size:13.5px}
+  .suggest .ttl{font-weight:700;margin-bottom:8px;color:#3c3027}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{border:1.5px solid var(--good);color:var(--good);background:var(--good-bg);border-radius:9px;padding:6px 11px;font-weight:700;cursor:pointer;font-size:13px;transition:.12s}
+  .chip:hover{background:var(--good);color:#fff}
+  .chip span{font-weight:500;opacity:.8;font-size:11.5px}
+
+  /* Info section */
+  .info{margin:34px 0 12px}
+  .info h2{font-size:19px;margin:0 0 12px}
+  .info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+  .info-grid .card{padding:16px}
+  .info-grid h3{margin:0 0 6px;font-size:15px;color:var(--brand)}
+  .info-grid p{margin:0;font-size:13.5px;color:var(--muted)}
+
+  footer.site{border-top:1px solid var(--line);margin-top:30px;padding:22px 0;color:var(--muted);font-size:13px;background:#fbf6ee}
+  footer .wrap{display:flex;flex-wrap:wrap;gap:8px;justify-content:space-between;align-items:center}
+  .disclaimer{font-size:12px;color:var(--muted);margin-top:10px;font-style:italic}
+
+  @media (max-width:560px){
+    .seg{font-size:9px}
+    .seg small{display:none}
+    .num-wrap input{font-size:19px}
+  }
+</style>
+</head>
+<body>
+<header class="site">
+  <div class="topbar">
+    <a class="brand" href="https://noithattheone.vn/" target="_blank" rel="noopener">
+      <span class="logo">T1</span>
+      <span>
+        <b>Nội Thất The One</b>
+        <small>Thước Lỗ Ban Online</small>
+      </span>
+    </a>
+    <a class="back" href="https://noithattheone.vn/" target="_blank" rel="noopener">← Về website</a>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero">
+    <h1>Tra cứu Thước Lỗ Ban</h1>
+    <p>Nhập kích thước cần đo để kiểm tra rơi vào <strong style="color:var(--good)">cung tốt (đỏ)</strong> hay <strong>cung xấu (đen)</strong> theo phong thủy. Áp dụng cho nội thất, cửa, bàn thờ và các hạng mục xây dựng.</p>
+  </section>
+
+  <div class="card input-card">
+    <div class="input-row">
+      <div class="field">
+        <label class="lbl" for="value">Kích thước cần đo</label>
+        <div class="num-wrap">
+          <input id="value" type="number" inputmode="decimal" min="0" step="1" placeholder="Ví dụ: 810" autocomplete="off">
+          <div class="unit-toggle" role="group" aria-label="Đơn vị">
+            <button type="button" data-unit="mm" aria-pressed="true">mm</button>
+            <button type="button" data-unit="cm" aria-pressed="false">cm</button>
+            <button type="button" data-unit="m" aria-pressed="false">m</button>
+          </div>
+        </div>
+        <div class="hint">Mẹo: nhập số đo thực tế (lọt lòng đối với cửa). Bấm vào kích thước gợi ý màu đỏ để tự điền số đẹp.</div>
+      </div>
+    </div>
+  </div>
+
+  <section id="results" aria-live="polite"></section>
+
+  <section class="info">
+    <h2>Phân biệt 3 loại thước lỗ ban</h2>
+    <div class="info-grid">
+      <div class="card">
+        <h3>Thước 52.2cm — Thông thủy</h3>
+        <p>Đo khoảng <strong>rỗng/lọt lòng</strong>: cửa đi, cửa sổ, cổng, ô thoáng, giếng trời.</p>
+      </div>
+      <div class="card">
+        <h3>Thước 42.9cm — Dương trạch</h3>
+        <p>Đo khối <strong>đặc trong xây dựng</strong>: bệ bếp, bậc thang, bệ, móng, khối xây.</p>
+      </div>
+      <div class="card">
+        <h3>Thước 38.8cm — Nội thất / Âm phần</h3>
+        <p>Đo <strong>đồ nội thất</strong>: bàn, tủ, giường, kệ, bàn thờ. Loại thước sát với sản phẩm của The One.</p>
+      </div>
+    </div>
+    <p class="disclaimer">* Quy ước màu: cung đỏ là cát lợi (nên chọn), cung đen là hung (nên tránh). Màu sắc xác định theo cung lớn; kết quả hiển thị kèm tên phân cung và ý nghĩa. Công cụ mang tính tham khảo phong thủy.</p>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <span>© <span id="yr"></span> Nội Thất The One — Sản xuất nội thất trường học, văn phòng, doanh nghiệp.</span>
+    <a href="https://noithattheone.vn/" target="_blank" rel="noopener">noithattheone.vn</a>
+  </div>
+</footer>
+
+<script>
+"use strict";
+/* ============================================================
+   DỮ LIỆU THƯỚC LỖ BAN
+   Mỗi thước: chiều dài chu kỳ (mm), danh sách cung lớn theo thứ tự.
+   Mỗi cung lớn: tên, good (true=tốt/đỏ, false=xấu/đen), ý nghĩa, các phân cung.
+   ============================================================ */
+const RULERS = [
+  {
+    id:"loban52",
+    name:"Thước 52.2cm",
+    use:"Thông thủy — cửa, cửa sổ, cổng (khoảng rỗng/lọt lòng)",
+    cycle:522,
+    cungs:[
+      {name:"Quý Nhân", good:true,  meaning:"Gặp quý nhân phù trợ, làm ăn phát đạt, con cái hiếu thảo, thông minh.", subs:["Quyền Lộc","Trung Tín","Tác Quan","Phát Đạt","Thông Minh"]},
+      {name:"Hiểm Họa", good:false, meaning:"Tai họa rình rập, trôi dạt tha hương, gia đình tán tài tán lộc.", subs:["Án Thành","Hỗn Nhân","Thất Hiếu","Tai Họa","Thường Bệnh"]},
+      {name:"Thiên Tai", good:false, meaning:"Dễ ốm đau bệnh tật, hao người tốn của, tai ương bất ngờ.", subs:["Hoàn Tử","Quan Tài","Thân Tàn","Thất Tài","Hệ Quả"]},
+      {name:"Thiên Tài", good:true,  meaning:"Tài lộc dồi dào, văn chương hiển đạt, thêm tài thêm lộc.", subs:["Thi Thư","Văn Học","Thanh Quý","Tác Lộc","Thiên Lộc"]},
+      {name:"Phúc Lộc", good:true,  meaning:"Phúc lộc đầy nhà, phú quý song toàn, con cháu hiển vinh.", subs:["Trí Tồn","Phú Quý","Tiến Bửu","Thập Thiện","Văn Chương"]},
+      {name:"Cô Độc", good:false, meaning:"Cô quạnh, ly tán, hao người, gia đạo bất hòa.", subs:["Bạc Nghịch","Vô Vọng","Ly Tán","Tửu Thực","Dâm Dục"]},
+      {name:"Thiên Tặc", good:false, meaning:"Bệnh tật, tù ngục, mất của, tai họa do người ngoài.", subs:["Phong Bệnh","Chiêu Ôn","Ôn Tài","Ngục Tù","Quan Tài"]},
+      {name:"Tể Tướng", good:true,  meaning:"Gia đạo hanh thông, công danh sự nghiệp, may mắn bất ngờ.", subs:["Đại Tài","Thi Thư","Hoạch Tài","Hiếu Tử","Quý Nhân"]}
+    ]
+  },
+  {
+    id:"loban42",
+    name:"Thước 42.9cm",
+    use:"Dương trạch — bệ bếp, bậc thang, khối xây dựng đặc",
+    cycle:429,
+    cungs:[
+      {name:"Tài", good:true,  meaning:"Tiền của dồi dào, gia đạo thịnh vượng, của cải sung túc.", subs:["Tài Đức","Bảo Khố","Lục Hợp","Nghênh Phúc"]},
+      {name:"Bệnh", good:false, meaning:"Bệnh tật, tổn thất tài chính, rắc rối kiện tụng.", subs:["Thoái Tài","Công Sự","Lao Chấp","Cô Quả"]},
+      {name:"Ly", good:false, meaning:"Chia ly, mất mát, thất thoát, người nhà xa cách.", subs:["Trường Khố","Kiếp Tài","Quan Quỷ","Thất Thoát"]},
+      {name:"Nghĩa", good:true,  meaning:"Việc nghĩa tốt đẹp, con cháu hiếu thuận, được quý nhân giúp.", subs:["Thêm Đinh","Ích Lợi","Quý Tử","Đại Cát"]},
+      {name:"Quan", good:true,  meaning:"Thăng quan tiến chức, công danh hiển đạt, thu nhập tăng.", subs:["Thuận Khoa","Hoạnh Tài","Tiến Ích","Phú Quý"]},
+      {name:"Kiếp", good:false, meaning:"Tai ương, trộm cắp, ly hương, hao tán tiền của.", subs:["Tử Biệt","Thoái Khẩu","Ly Hương","Tài Thất"]},
+      {name:"Hại", good:false, meaning:"Tai họa, bệnh tật, thị phi khẩu thiệt.", subs:["Tai Chí","Tử Tuyệt","Bệnh Lâm","Khẩu Thiệt"]},
+      {name:"Bản", good:true,  meaning:"Vững bền, đăng khoa, tiến bảo, gia đạo hưng vượng.", subs:["Tài Chí","Đăng Khoa","Tiến Bảo","Hưng Vượng"]}
+    ]
+  },
+  {
+    id:"loban38",
+    name:"Thước 38.8cm",
+    use:"Nội thất / Âm phần — bàn, tủ, giường, kệ, bàn thờ",
+    cycle:388,
+    cungs:[
+      {name:"Đinh", good:true,  meaning:"Thêm đinh thêm phúc, con cháu đỗ đạt, tài vượng.", subs:["Phúc Tinh","Cập Đệ","Tài Vượng","Đăng Khoa"]},
+      {name:"Hại", good:false, meaning:"Khẩu thiệt thị phi, bệnh tật, tử tuyệt, họa tới.", subs:["Khẩu Thiệt","Lâm Bệnh","Tử Tuyệt","Họa Chí"]},
+      {name:"Vượng", good:true,  meaning:"Hưng vượng, hỷ sự liên tiếp, tiến bảo, thêm phúc.", subs:["Thiên Đức","Hỷ Sự","Tiến Bảo","Thêm Phúc"]},
+      {name:"Khổ", good:false, meaning:"Thất thoát, quan quỷ, kiếp tài, không người nối dõi.", subs:["Thất Thoát","Quan Quỷ","Kiếp Tài","Vô Tự"]},
+      {name:"Nghĩa", good:true,  meaning:"Đại cát, tài vượng, lợi ích, đầy kho lẫm.", subs:["Đại Cát","Tài Vượng","Lợi Ích","Thiên Khố"]},
+      {name:"Quan", good:true,  meaning:"Phú quý, tài lộc, thuận khoa, tiến bảo.", subs:["Phú Quý","Tiến Bảo","Tài Lộc","Thuận Khoa"]},
+      {name:"Tử", good:false, meaning:"Ly hương, tử biệt, thoát đinh, thất tài.", subs:["Ly Hương","Tử Biệt","Thoát Đinh","Thất Tài"]},
+      {name:"Hưng", good:true,  meaning:"Đăng khoa, quý tử, thêm đinh, hưng vượng.", subs:["Đăng Khoa","Quý Tử","Thêm Đinh","Hưng Vượng"]},
+      {name:"Thất", good:false, meaning:"Cô quả, lao chấp, công sự, thoát tài.", subs:["Cô Quả","Lao Chấp","Công Sự","Thoát Tài"]},
+      {name:"Tài", good:true,  meaning:"Nghênh phúc, lục hợp, tiến bảo, tài đức vẹn toàn.", subs:["Nghênh Phúc","Lục Hợp","Tiến Bảo","Tài Đức"]}
+    ]
+  }
+];
+
+/* ---------- Logic tính cung ---------- */
+function lookup(ruler, mm){
+  const cycle = ruler.cycle;
+  const nSub = ruler.cungs.reduce((s,c)=>s+c.subs.length,0);
+  const subW = cycle / nSub;
+  let rem = mm % cycle;
+  if (rem < 0) rem += cycle;
+  const cycleIndex = Math.floor(mm / cycle);
+  let subIdx = Math.floor(rem / subW);
+  if (subIdx >= nSub) subIdx = nSub - 1;
+  // tìm cung lớn chứa subIdx
+  let acc = 0, cungIdx = 0, subInCung = 0;
+  for (let i=0;i<ruler.cungs.length;i++){
+    const len = ruler.cungs[i].subs.length;
+    if (subIdx < acc + len){ cungIdx = i; subInCung = subIdx - acc; break; }
+    acc += len;
+  }
+  const cung = ruler.cungs[cungIdx];
+  return {
+    cung, cungIdx, subInCung, subIdx, rem, cycleIndex,
+    subName: cung.subs[subInCung],
+    good: cung.good
+  };
+}
+
+/* tìm các kích thước tốt gần nhất (mm) */
+function nearestGood(ruler, mm, count){
+  const res = [];
+  const seen = new Set();
+  for (let d=0; d<=ruler.cycle && res.length<count*3; d++){
+    for (const cand of (d===0?[mm]:[mm-d, mm+d])){
+      if (cand<=0 || seen.has(cand)) continue;
+      seen.add(cand);
+      if (lookup(ruler, cand).good){ res.push({mm:cand, diff:cand-mm}); }
+      if (res.length>=count) break;
+    }
+    if (res.length>=count) break;
+  }
+  return res.slice(0,count).sort((a,b)=>a.mm-b.mm);
+}
+
+/* ---------- Render ---------- */
+const resultsEl = document.getElementById("results");
+const valueEl = document.getElementById("value");
+let unit = "mm";
+
+function toMM(v){ return unit==="mm"? v : unit==="cm"? v*10 : v*1000; }
+function fmtMM(mm){
+  // hiển thị mm và cm
+  const cm = mm/10;
+  return `${mm.toLocaleString("vi-VN")} mm <span style="color:var(--muted);font-weight:500">(${cm.toLocaleString("vi-VN",{maximumFractionDigits:2})} cm)</span>`;
+}
+
+function segHTML(ruler, active){
+  const nSub = ruler.cungs.reduce((s,c)=>s+c.subs.length,0);
+  let html = '<div class="scale"><div class="scale-track">';
+  ruler.cungs.forEach((c,ci)=>{
+    const w = (c.subs.length/nSub*100).toFixed(4);
+    const cls = (c.good?"good":"bad") + (ci===active.cungIdx?" active":"");
+    html += `<div class="seg ${cls}" style="flex:0 0 ${w}%">${c.name}<small>${c.good?"Tốt":"Xấu"}</small></div>`;
+  });
+  // marker theo vị trí rem
+  const left = (active.rem/ruler.cycle*100).toFixed(3);
+  html += `<div class="marker" style="left:${left}%"></div>`;
+  html += '</div>';
+  html += `<div class="scale-cap"><span>0</span><span>Chu kỳ ${ruler.cycle/10} cm</span></div></div>`;
+  return html;
+}
+
+function render(){
+  const raw = parseFloat(valueEl.value);
+  if (isNaN(raw) || raw<=0){
+    resultsEl.innerHTML = `<div class="card input-card" style="margin-top:18px;color:var(--muted)">Nhập một kích thước lớn hơn 0 để xem kết quả tra cứu.</div>`;
+    return;
+  }
+  const mm = Math.round(toMM(raw)*1000)/1000;
+  let html = "";
+  RULERS.forEach(r=>{
+    const res = lookup(r, mm);
+    const g = res.good;
+    const sugg = g ? [] : nearestGood(r, Math.round(mm), 4);
+    html += `<div class="card ruler-block">
+      <div class="ruler-head">
+        <div class="ruler-title"><b>${r.name}</b> &nbsp; <span>${r.use}</span></div>
+        <div class="verdict ${g?'good':'bad'}"><span class="dot"></span>${g?'CUNG TỐT (ĐỎ)':'CUNG XẤU (ĐEN)'}</div>
+      </div>
+      <div class="ruler-body">
+        <div class="meta-grid">
+          <div class="mi"><i>Cung lớn</i><b>${res.cung.name}</b></div>
+          <div class="mi"><i>Phân cung</i><b>${res.subName}</b></div>
+          <div class="mi"><i>Chu kỳ thứ</i><b>${res.cycleIndex} &nbsp;<span style="color:var(--muted);font-weight:500;font-size:12px">(dư ${(res.rem).toFixed(1)} mm)</span></b></div>
+        </div>
+        <div class="meaning">${res.cung.meaning}</div>
+        ${segHTML(r, res)}
+        ${ sugg.length ? `<div class="suggest"><div class="ttl">Kích thước đẹp gần nhất (bấm để chọn):</div><div class="chips">${
+            sugg.map(s=>`<button type="button" class="chip" data-mm="${s.mm}">${s.mm.toLocaleString("vi-VN")} mm <span>(${s.diff>0?'+':''}${s.diff})</span></button>`).join("")
+          }</div></div>` : `<div class="suggest"><div class="ttl" style="color:var(--good)">✔ Kích thước này đã đẹp theo thước ${r.name.replace('Thước ','')}.</div></div>` }
+      </div>
+    </div>`;
+  });
+  resultsEl.innerHTML = html;
+
+  // gắn sự kiện cho chip gợi ý
+  resultsEl.querySelectorAll(".chip").forEach(ch=>{
+    ch.addEventListener("click", ()=>{
+      const v = parseFloat(ch.dataset.mm);
+      // chuyển về đơn vị đang chọn
+      valueEl.value = unit==="mm"? v : unit==="cm"? v/10 : v/1000;
+      render();
+      resultsEl.scrollIntoView({behavior:"smooth", block:"start"});
+    });
+  });
+}
+
+/* ---------- Sự kiện ---------- */
+valueEl.addEventListener("input", render);
+document.querySelectorAll(".unit-toggle button").forEach(b=>{
+  b.addEventListener("click", ()=>{
+    const newUnit = b.dataset.unit;
+    // chuyển đổi giá trị hiện tại sang đơn vị mới để giữ nguyên kích thước thực
+    const cur = parseFloat(valueEl.value);
+    if(!isNaN(cur)){
+      const mm = toMM(cur);
+      unit = newUnit;
+      valueEl.value = unit==="mm"? mm : unit==="cm"? mm/10 : mm/1000;
+    } else {
+      unit = newUnit;
+    }
+    document.querySelectorAll(".unit-toggle button").forEach(x=>x.setAttribute("aria-pressed", x===b?"true":"false"));
+    render();
+  });
+});
+
+document.getElementById("yr").textContent = new Date().getFullYear();
+// giá trị mẫu
+valueEl.value = 810;
+render();
+</script>
+</body>
+</html>
