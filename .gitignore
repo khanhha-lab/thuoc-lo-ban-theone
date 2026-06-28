@@ -1,0 +1,18 @@
+# Bảo mật — không bao giờ commit file chứa key/mật khẩu
+.env
+**/.env
+
+# Tài liệu nội bộ — KHÔNG đẩy lên repo public
+Tài liệu đào tại Claude Code/
+
+# File tạm khi chạy skill
+scraped-data.json
+__pycache__/
+*.pyc
+
+# Output sinh ra khi chạy skill tao-social-wordpress
+.claude/skills/**/imgs/
+.claude/skills/**/homepage.html
+.claude/skills/**/about.html
+.claude/skills/**/footer.html
+.claude/skills/**/product-images.json
