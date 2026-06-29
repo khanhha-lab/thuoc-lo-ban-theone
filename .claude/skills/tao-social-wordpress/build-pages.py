@@ -1,80 +1,49 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""Sinh nội dung Gutenberg BLOCK cho Vinamilk Social:
-- Trang chủ (có ảnh sản phẩm thật, thẻ đồng kích thước, KHÔNG footer trong trang)
-- Trang giới thiệu
-- Footer thương hiệu (dùng để thay template-part footer của theme -> tránh 2 footer)
+"""Sinh nội dung Gutenberg BLOCK cho Social WordPress — DATA-DRIVEN.
+
+Đọc dữ liệu dự án từ project.json (xem project.example.json để biết cấu trúc),
+sinh ra homepage.html, about.html, footer.html ở định dạng block.
+
+Dùng: python build-pages.py [project.json]   (mặc định: project.json)
+
+Lưu ý các bài học đã đúc kết (chi tiết trong SKILL.md):
+- Phải dùng block Gutenberg (theme block bỏ qua HTML thuần).
+- Layout sản phẩm dùng wp:columns (tự xếp dọc trên mobile), KHÔNG dùng grid
+  columnCount (không co lại trên mobile -> vỡ chữ).
+- Footer đặt ở template-part của theme, KHÔNG nhét vào trang (tránh 2 footer).
 """
+import sys
 import json
 import html
 
-BRAND = "#00529C"
-BANNER = "https://vinamilk76.wordpress.com/wp-content/uploads/2026/06/banner.jpg"
-LOGO = "https://vinamilk76.wordpress.com/wp-content/uploads/2026/06/logo.png"
-SITE = "https://www.vinamilk.com.vn"
+CFG = sys.argv[1] if len(sys.argv) > 1 else "project.json"
+D = json.load(open(CFG, encoding="utf-8"))
 
-PHONE = "1900 636 979"
-ADDRESS = "10 Tân Trào, Phường Tân Mỹ, Thành phố Hồ Chí Minh"
-EMAIL = "vinamilk@vinamilk.com.vn"
-BIO_SHORT = "Vinamilk - Mang nguồn dinh dưỡng từ sữa chất lượng đến mọi gia đình Việt"
-BIO_LONG = ("Thành lập năm 1976, Vinamilk là thương hiệu sữa hàng đầu Việt Nam với đa dạng "
-            "sản phẩm như sữa tươi, sữa bột, sữa chua... Vinamilk mang đến nguồn sữa sạch, "
-            "chất lượng, hương vị thơm ngon và giá trị dinh dưỡng cho mọi độ tuổi.")
-DESC = ("Tại Vinamilk, chúng tôi vun đắp hành trình dinh dưỡng gần 50 năm qua bằng khát vọng "
-        "nâng cao tầm vóc Việt với những sản phẩm đạt chuẩn quốc tế, phù hợp mọi lứa tuổi.")
-
-SOCIAL = [
-    ("Facebook", "https://www.facebook.com/vinamilkofficial/"),
-    ("YouTube", "https://www.youtube.com/@vinamilk"),
-    ("Instagram", "https://www.instagram.com/vinamilk/"),
-    ("TikTok", "https://www.tiktok.com/@vinamilk.official"),
-    ("LinkedIn", "https://www.linkedin.com/company/vinamilk"),
-]
-
-CATEGORIES = [
-    ("Sữa tươi", [
-        ("Sữa tươi thanh trùng nguyên chất Green Farm không đường", "/products/sua-tuoi-thanh-trung-nguyen-chat-vinamilk-green-farm-khong-duong"),
-        ("Sữa tươi tiệt trùng Green Farm nguyên chất", "/products/sua-tuoi-tiet-trung-green-farm-nguyen-chat"),
-        ("Sữa tươi tiệt trùng hương dâu", "/products/sua-tuoi-tiet-trung-huong-dau"),
-    ]),
-    ("Sữa chua", [
-        ("Sữa chua uống Probi lựu đỏ ít đường", "/products/sua-chua-uong-probi-luu-do-it-duong"),
-        ("Sữa chua uống thanh trùng Green Farm", "/products/sua-chua-uong-thanh-trung-green-farm"),
-        ("Sữa chua Vinamilk Green Farm ít đường", "/products/sua-chua-vinamilk-green-farm-it-duong"),
-    ]),
-    ("Sữa hạt", [
-        ("Sữa hạt cao đạm Vinamilk", "/products/sua-hat-cao-dam-vinamilk"),
-        ("Sữa hạt Vinamilk 9 loại hạt", "/products/sua-hat-vinamilk-9-loai-hat"),
-        ("Sữa hạt Vinamilk 9 loại hạt không đường", "/products/sua-hat-vinamilk-9-loai-hat-khong-duong"),
-    ]),
-    ("Kem", [
-        ("Kem Gelato Matcha Vinamilk", "/products/kem-gelato-matcha-vinamilk"),
-        ("Kem mịn sầu riêng Vinamilk", "/products/kem-min-sau-rieng-vinamilk"),
-        ("Kem mịn Vinamilk dừa", "/products/kem-min-vinamilk-dua"),
-    ]),
-    ("Nước ép & Trà", [
-        ("Nước ép kiwi táo collagen Vinamilk", "/products/nuoc-ep-kiwi-tao-collagen-vinamilk"),
-        ("Trà atiso ít đường Vfresh", "/products/tra-atiso-it-duong-vfresh"),
-    ]),
-]
-
-BLOGS = [
-    ("Công thức món ngon", "/blogs/cong-thuc-mon-ngon"),
-    ("Đẹp da đẹp dáng", "/blogs/dep-da-dep-dang"),
-    ("Góc chuyên gia", "/blogs/goc-chuyen-gia"),
-    ("Thông tin dinh dưỡng", "/blogs/thong-tin-dinh-duong"),
-]
-
-try:
-    PRODUCT_IMG = json.load(open("product-images.json", encoding="utf-8"))
-except FileNotFoundError:
-    PRODUCT_IMG = {}
+BRAND = D.get("brand_color", "#00529C")
+SITE = D.get("site", "")
+BANNER = D.get("banner", "")
+LOGO = D.get("logo", "")
+CONTACT = D.get("contact", {})
+BIO_SHORT = D.get("bio_short", "")
+BIO_LONG = D.get("bio_long", "")
+DESC = D.get("description", "")
+SOCIAL = D.get("social", [])
+CATEGORIES = D.get("categories", [])
+BLOG_CAT_ID = D.get("blog_category_id", 0)
 
 
-def heading(text, level=2, center=False, color=BRAND):
-    a_align = '"textAlign":"center",' if center else ''
-    attrs = f'{{{a_align}"level":{level}' + (f',"style":{{"color":{{"text":"{color}"}}}}' if color else '') + '}'
-    cls = 'wp-block-heading' + (' has-text-align-center' if center else '') + (' has-text-color' if color else '')
+def heading(text, level=2, center=False, color=BRAND, align=None):
+    parts = []
+    if align:
+        parts.append(f'"align":"{align}"')
+    if center:
+        parts.append('"textAlign":"center"')
+    parts.append(f'"level":{level}')
+    if color:
+        parts.append(f'"style":{{"color":{{"text":"{color}"}}}}')
+    attrs = '{' + ",".join(parts) + '}'
+    cls = 'wp-block-heading' + (f' align{align}' if align else '') + (' has-text-align-center' if center else '') + (' has-text-color' if color else '')
     style = f' style="color:{color}"' if color else ''
     return f'<!-- wp:heading {attrs} --><h{level} class="{cls}"{style}>{html.escape(text)}</h{level}><!-- /wp:heading -->'
 
@@ -94,9 +63,15 @@ def para(text, center=False, white=False):
     return f'<!-- wp:paragraph{a} --><p{cls_attr}{style}>{text}</p><!-- /wp:paragraph -->'
 
 
-def image(url, alt, width=None):
-    w = f' {{"width":"{width}"}}' if width else ''
-    return (f'<!-- wp:image{w} --><figure class="wp-block-image">'
+def image(url, alt, width=None, full=False):
+    attrs = {}
+    if width:
+        attrs['width'] = width
+    if full:
+        attrs['align'] = 'full'
+    a = ' ' + json.dumps(attrs) if attrs else ''
+    cls = 'wp-block-image' + (' alignfull' if full else '')
+    return (f'<!-- wp:image{a} --><figure class="{cls}">'
             f'<img src="{url}" alt="{html.escape(alt)}"/></figure><!-- /wp:image -->')
 
 
@@ -117,76 +92,93 @@ def button(text, url, center=True):
             '<!-- /wp:button --></div><!-- /wp:buttons -->')
 
 
-def product_card_column(title, path):
-    url = SITE + path
-    img = PRODUCT_IMG.get(path, "")
+def product_card(item):
+    """1 thẻ sản phẩm = group bo viền; chiều cao tự cân bằng do column stretch."""
+    title, path, img = item.get("title", ""), item.get("path", ""), item.get("image", "")
+    url = (SITE + path) if path.startswith("/") else path
     inner = (product_image(img, title) if img else "") \
         + para("<strong>" + html.escape(title) + "</strong>", center=True) \
         + button("Xem sản phẩm →", url)
-    return ('<!-- wp:column {"width":"33.33%"} -->'
-            '<div class="wp-block-column" style="flex-basis:33.33%">' + inner + '</div>'
-            '<!-- /wp:column -->')
+    attrs = ('{"style":{"border":{"radius":"12px","width":"1px","color":"#e3e8ef"},'
+             '"spacing":{"padding":{"top":"16px","bottom":"16px","left":"16px","right":"16px"}}},'
+             '"backgroundColor":"white","layout":{"type":"flex","orientation":"vertical"}}')
+    return (f'<!-- wp:group {attrs} -->'
+            '<div class="wp-block-group has-white-background-color has-background has-border-color" '
+            'style="border-color:#e3e8ef;border-width:1px;border-radius:12px;'
+            'padding-top:16px;padding-bottom:16px;padding-left:16px;padding-right:16px">'
+            + inner + '</div><!-- /wp:group -->')
 
 
-def category_block(items):
-    cols = "".join(product_card_column(t, p) for t, p in items)
-    return ('<!-- wp:columns {"verticalAlignment":"stretch"} -->'
-            '<div class="wp-block-columns are-vertically-aligned-stretch">' + cols + '</div>'
-            '<!-- /wp:columns -->')
+def category_columns(items):
+    """wp:columns: desktop chia đều ngang, MOBILE tự xếp dọc. KHÔNG đặt width cột."""
+    cols = "".join('<!-- wp:column --><div class="wp-block-column">' + product_card(it) + '</div><!-- /wp:column -->'
+                   for it in items)
+    attrs = ('{"align":"full","verticalAlignment":"stretch",'
+             '"style":{"spacing":{"padding":{"left":"40px","right":"40px"}}}}')
+    return (f'<!-- wp:columns {attrs} -->'
+            '<div class="wp-block-columns alignfull are-vertically-aligned-stretch" '
+            'style="padding-left:40px;padding-right:40px">'
+            + cols + '</div><!-- /wp:columns -->')
 
 
-def blog_list():
-    items = "".join(
-        f'<!-- wp:list-item --><li><a href="{SITE+p}" target="_blank" rel="noreferrer noopener">{html.escape(t)}</a></li><!-- /wp:list-item -->'
-        for t, p in BLOGS)
-    return f'<!-- wp:list --><ul class="wp-block-list">{items}</ul><!-- /wp:list -->'
+def latest_posts(cat_id):
+    attrs = ('{"postsToShow":5,"order":"desc","orderBy":"date",'
+             '"displayPostContent":true,"displayPostContentRadio":"excerpt","excerptLength":22,'
+             '"displayPostDate":true,"displayFeaturedImage":true,'
+             '"featuredImageSizeSlug":"medium","addLinkToFeaturedImage":true,'
+             f'"categories":[{{"id":{cat_id},"value":"{cat_id}"}}],'
+             '"align":"wide"}')
+    return f'<!-- wp:latest-posts {attrs} /-->'
 
 
 def homepage():
     p = []
-    p.append(image(BANNER, "Vinamilk banner"))
-    p.append(image(LOGO, "Vinamilk logo", width="120px"))
-    p.append(heading(BIO_SHORT, level=2, center=True))
+    if BANNER:
+        p.append(image(BANNER, "Banner", full=True))
+    if LOGO:
+        p.append(image(LOGO, "Logo", width="120px"))
+    p.append(heading(BIO_SHORT, level=2, center=True, align="wide"))
     p.append(para(html.escape(DESC), center=True))
-    p.append(heading("Sản phẩm nổi bật", level=2))
-    for cat, items in CATEGORIES:
-        p.append(heading(cat, level=3, color="#1a2b3c"))
-        p.append(category_block(items))
-    p.append(heading("Bài viết mới nhất", level=2))
-    p.append(blog_list())
-    # KHÔNG còn footer trong trang -> footer nằm ở template-part của theme
+    p.append(heading("Sản phẩm nổi bật", level=2, align="wide", center=True))
+    for cat in CATEGORIES:
+        p.append(heading(cat["name"], level=3, color="#1a2b3c", align="wide", center=True))
+        p.append(category_columns(cat["items"]))
+    if BLOG_CAT_ID:
+        p.append(heading("Bài viết mới nhất", level=2, align="wide", center=True))
+        p.append(latest_posts(BLOG_CAT_ID))
     return "\n".join(p)
 
 
 def footer_part():
-    """Footer thương hiệu, dùng để THAY content của template-part footer (theme)."""
+    """Footer thương hiệu, dùng để THAY content template-part footer của theme."""
     contact = (heading("Thông tin liên hệ", level=3, color="#ffffff")
-               + para(f"☎ Hotline: {PHONE}", white=True)
-               + para("📍 " + html.escape(ADDRESS), white=True)
-               + para(f'🌐 Website: <a href="{SITE}" target="_blank" rel="noreferrer noopener">vinamilk.com.vn</a>', white=True)
-               + para(f"✉ Email: {EMAIL}", white=True))
+               + para(f"☎ Hotline: {CONTACT.get('phone','')}", white=True)
+               + para("📍 " + html.escape(CONTACT.get('address', '')), white=True)
+               + para(f'🌐 Website: <a href="{SITE}" target="_blank" rel="noreferrer noopener">{SITE.replace("https://","").replace("http://","")}</a>', white=True)
+               + para(f"✉ Email: {CONTACT.get('email','')}", white=True))
     socials = " · ".join(f'<a href="{u}" target="_blank" rel="noreferrer noopener">{n}</a>' for n, u in SOCIAL)
-    about_col = (heading("Về Vinamilk", level=3, color="#ffffff")
+    about_col = (heading("Giới thiệu", level=3, color="#ffffff")
                  + para(html.escape(BIO_LONG), white=True)
                  + para(socials, white=True))
-    footer_cols = ('<!-- wp:columns --><div class="wp-block-columns">'
-                   '<!-- wp:column --><div class="wp-block-column">' + contact + '</div><!-- /wp:column -->'
-                   '<!-- wp:column --><div class="wp-block-column">' + about_col + '</div><!-- /wp:column -->'
+    footer_cols = ('<!-- wp:columns {"style":{"spacing":{"blockGap":{"left":"60px"}}}} -->'
+                   '<div class="wp-block-columns">'
+                   '<!-- wp:column {"width":"45%"} --><div class="wp-block-column" style="flex-basis:45%">' + contact + '</div><!-- /wp:column -->'
+                   '<!-- wp:column {"width":"55%"} --><div class="wp-block-column" style="flex-basis:55%">' + about_col + '</div><!-- /wp:column -->'
                    '</div><!-- /wp:columns -->')
     attrs = ('{"align":"full","style":{"color":{"background":"' + BRAND + '","text":"#ffffff"},'
-             '"spacing":{"padding":{"top":"40px","bottom":"30px","left":"24px","right":"24px"}}},'
-             '"layout":{"type":"constrained"}}')
+             '"spacing":{"padding":{"top":"40px","bottom":"30px","left":"60px","right":"60px"}}},'
+             '"layout":{"type":"default"}}')
     return (f'<!-- wp:group {attrs} -->'
             f'<div class="wp-block-group alignfull has-text-color has-background" '
-            f'style="color:#ffffff;background-color:{BRAND};padding-top:40px;padding-bottom:30px;padding-left:24px;padding-right:24px">'
+            f'style="color:#ffffff;background-color:{BRAND};padding-top:40px;padding-bottom:30px;padding-left:60px;padding-right:60px">'
             + footer_cols + '</div><!-- /wp:group -->')
 
 
 def about():
     return "\n".join([
-        image(LOGO, "Vinamilk logo", width="140px"),
+        image(LOGO, "Logo", width="140px") if LOGO else "",
         heading("Về Website Chính Thức", level=2),
-        para("<em>[NỘI DUNG GIỚI THIỆU — bạn nhập chi tiết sau]</em>"),
+        para("<em>[NỘI DUNG GIỚI THIỆU — nhập chi tiết sau]</em>"),
         para(html.escape(BIO_LONG)),
         para(f'Website chính thức: <a href="{SITE}" target="_blank" rel="noreferrer noopener">{SITE}</a>'),
     ])
@@ -196,4 +188,4 @@ if __name__ == "__main__":
     open("homepage.html", "w", encoding="utf-8").write(homepage())
     open("about.html", "w", encoding="utf-8").write(about())
     open("footer.html", "w", encoding="utf-8").write(footer_part())
-    print("✓ Đã tạo homepage.html, about.html, footer.html (block, có ảnh sản phẩm, footer riêng)")
+    print(f"✓ Đã sinh homepage.html, about.html, footer.html từ {CFG}")

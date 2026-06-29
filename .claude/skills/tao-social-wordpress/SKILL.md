@@ -134,17 +134,38 @@ Kết thúc, báo cáo bằng bảng Markdown gồm:
     vd `pub/assembler//footer`).
 13. **Ảnh sản phẩm:** trang cào tĩnh thường không có ảnh; lấy ảnh thật bằng cách fetch
     từng trang sản phẩm rồi đọc thẻ `og:image`. Dùng block image `aspectRatio`+`scale`
-    để các thẻ đồng kích thước; đặt cột `width:33.33%` để các hàng đều nhau.
+    để các thẻ đồng kích thước.
+14. **Layout sản phẩm — dùng `wp:columns`, KHÔNG dùng grid:**
+    - ĐỪNG đặt `width`/`flex-basis` cho `wp:column` (cộng gap > 100% → wrap → dọc trên desktop).
+    - ĐỪNG dùng `grid` + `columnCount` (cố định, **không co lại trên mobile** → cột quá hẹp,
+      chữ trong nút vỡ mỗi dòng 1 ký tự).
+    - ✅ Dùng `wp:columns` KHÔNG đặt width: desktop chia đều ngang (flex), **mobile tự xếp dọc**
+      (isStackedOnMobile mặc định). Thêm `verticalAlignment:stretch` để các thẻ cao bằng nhau,
+      `align:"full"` để dàn rộng. Mỗi thẻ là 1 group bo viền bên trong column.
+15. **Logo header:** theme hiện chữ qua `<!-- wp:site-title /-->`. Thay logo bằng cách set
+    option `site_logo=<media_id>` và đổi block đó thành `<!-- wp:site-logo {"width":150} /-->`
+    trong template-part `header`.
+16. **Blog "3 bài mới nhất 1 category":** site mới chưa có bài → tạo category + ≥3 post
+    (publish) rồi dùng `wp:latest-posts {"postsToShow":3,"categories":[{"id":<id>,"value":"<id>"}]}`.
+    (Block này chỉ hiển thị bài của CHÍNH site, không kéo được bài từ web ngoài.)
 
 ---
 
 ## 6. File bổ trợ (load on-demand — chỉ đọc khi cần)
 - `get-token.py` — đổi `code` OAuth2 → `access_token`, lưu vào `.env` (cho gói free).
 - `scrape-site.py` — cào meta, sản phẩm, bài viết, liên hệ từ website chính → `scraped-data.json`.
-- `build-pages.py` — sinh nội dung **Gutenberg block** cho trang chủ + giới thiệu.
+- `build-pages.py` — **data-driven**: đọc `project.json` → sinh `homepage.html`,
+  `about.html`, `footer.html` (định dạng Gutenberg block). Dùng: `python build-pages.py project.json`.
+- `project.example.json` — **mẫu dữ liệu dự án** (Vinamilk): màu thương hiệu, logo/banner,
+  liên hệ, bio, social, danh mục + sản phẩm (kèm ảnh), `blog_category_id`. Sao chép thành
+  `project.json` rồi điền cho dự án mới.
 - `wp_client.py` — gọi WordPress REST API: test kết nối, tạo page/post, upload ảnh, tạo category.
 - `checklist.md` — bảng nghiệm thu trước khi báo hoàn thành.
 - `.env.example` — mẫu khai báo thông tin đăng nhập (sao chép thành `.env` rồi điền).
+
+> **Quy trình gọn:** điền `.env` (key) + `project.json` (dữ liệu) → `python wp_client.py --test`
+> → `python build-pages.py project.json` → đẩy `homepage.html`/`about.html` qua API, thay
+> `footer.html` vào template-part footer → launch site → set trang chủ tĩnh → nghiệm thu.
 
 ## 7. Giao diện mẫu tham khảo
 Bám phong cách layout của:

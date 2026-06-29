@@ -1,0 +1,135 @@
+{
+  "brand_color": "#00529C",
+  "site": "https://www.vinamilk.com.vn",
+  "banner": "https://vinamilk76.wordpress.com/wp-content/uploads/2026/06/banner.jpg",
+  "logo": "https://vinamilk76.wordpress.com/wp-content/uploads/2026/06/logo.png",
+  "logo_media_id": 8,
+  "contact": {
+    "phone": "1900 636 979",
+    "address": "10 Tân Trào, Phường Tân Mỹ, Thành phố Hồ Chí Minh",
+    "email": "vinamilk@vinamilk.com.vn"
+  },
+  "bio_short": "Vinamilk - Mang nguồn dinh dưỡng từ sữa chất lượng đến mọi gia đình Việt",
+  "bio_long": "Thành lập năm 1976, Vinamilk là thương hiệu sữa hàng đầu Việt Nam với đa dạng sản phẩm như sữa tươi, sữa bột, sữa chua... Vinamilk mang đến nguồn sữa sạch, chất lượng, hương vị thơm ngon và giá trị dinh dưỡng cho mọi độ tuổi.",
+  "description": "Tại Vinamilk, chúng tôi vun đắp hành trình dinh dưỡng gần 50 năm qua bằng khát vọng nâng cao tầm vóc Việt với những sản phẩm đạt chuẩn quốc tế, phù hợp mọi lứa tuổi.",
+  "social": [
+    [
+      "Facebook",
+      "https://www.facebook.com/vinamilkofficial/"
+    ],
+    [
+      "YouTube",
+      "https://www.youtube.com/@vinamilk"
+    ],
+    [
+      "Instagram",
+      "https://www.instagram.com/vinamilk/"
+    ],
+    [
+      "TikTok",
+      "https://www.tiktok.com/@vinamilk.official"
+    ],
+    [
+      "LinkedIn",
+      "https://www.linkedin.com/company/vinamilk"
+    ]
+  ],
+  "categories": [
+    {
+      "name": "Sữa tươi",
+      "items": [
+        {
+          "title": "Sữa tươi thanh trùng nguyên chất Green Farm không đường",
+          "path": "/products/sua-tuoi-thanh-trung-nguyen-chat-vinamilk-green-farm-khong-duong",
+          "image": "https://d8um25gjecm9v.cloudfront.net/cms/ST_GF_TT_KD_INFO_208c29014f_00012d12c5.png"
+        },
+        {
+          "title": "Sữa tươi tiệt trùng Green Farm nguyên chất",
+          "path": "/products/sua-tuoi-tiet-trung-green-farm-nguyen-chat",
+          "image": "https://d8um25gjecm9v.cloudfront.net/cms/Shelf_GF_KD_1_L_c5ec8cb4f4.png"
+        },
+        {
+          "title": "Sữa tươi tiệt trùng hương dâu",
+          "path": "/products/sua-tuoi-tiet-trung-huong-dau",
+          "image": "https://d8um25gjecm9v.cloudfront.net/cms/ST_Tiet_trung_FM_100_Dau_180_4e3cd4154f_800ffa75d9.png"
+        }
+      ]
+    },
+    {
+      "name": "Sữa chua",
+      "items": [
+        {
+          "title": "Sữa chua uống Probi lựu đỏ ít đường",
+          "path": "/products/sua-chua-uong-probi-luu-do-it-duong",
+          "image": "https://d8um25gjecm9v.cloudfront.net/cms/Shelf_SCUMS_Probi_Happi_Luu_130_474961de54_e305d31103.png"
+        },
+        {
+          "title": "Sữa chua uống thanh trùng Green Farm",
+          "path": "/products/sua-chua-uong-thanh-trung-green-farm",
+          "image": "https://d8um25gjecm9v.cloudfront.net/cms/Shelf_SCUTT_GF_thanhtrung_ID_c44533fabf_a12cf2f54b.png"
+        },
+        {
+          "title": "Sữa chua Vinamilk Green Farm ít đường",
+          "path": "/products/sua-chua-vinamilk-green-farm-it-duong",
+          "image": "https://d8um25gjecm9v.cloudfront.net/cms/SCA_GF_ID_01_3f2afca818_b27c8eb07f.png"
+        }
+      ]
+    },
+    {
+      "name": "Sữa hạt",
+      "items": [
+        {
+          "title": "Sữa hạt cao đạm Vinamilk",
+          "path": "/products/sua-hat-cao-dam-vinamilk",
+          "image": "https://d8um25gjecm9v.cloudfront.net/cms/Shelf_STV_VMN_Caodam_ID_240_4eb07d87b4_40e7f610db.png"
+        },
+        {
+          "title": "Sữa hạt Vinamilk 9 loại hạt",
+          "path": "/products/sua-hat-vinamilk-9-loai-hat",
+          "image": "https://d8um25gjecm9v.cloudfront.net/cms/Shelf_STV_9_loai_hat_ID_1_Lvuong_b4860d2d83_6a764f6f34.png"
+        },
+        {
+          "title": "Sữa hạt Vinamilk 9 loại hạt không đường",
+          "path": "/products/sua-hat-vinamilk-9-loai-hat-khong-duong",
+          "image": "https://d8um25gjecm9v.cloudfront.net/cms/Shelf_STV_VNM_9hat_KD_180_6c5998fecc_f2ab07220e.png"
+        }
+      ]
+    },
+    {
+      "name": "Kem",
+      "items": [
+        {
+          "title": "Kem Gelato Matcha Vinamilk",
+          "path": "/products/kem-gelato-matcha-vinamilk",
+          "image": "https://d8um25gjecm9v.cloudfront.net/cms/KEM_Gelato_VNM_Matcha_90_03_cd99cafb17.png"
+        },
+        {
+          "title": "Kem mịn sầu riêng Vinamilk",
+          "path": "/products/kem-min-sau-rieng-vinamilk",
+          "image": "https://d8um25gjecm9v.cloudfront.net/cms/Shelf_KEM_Kem_hop_VNM_Saurieng_870_29a34d0b49_dd44369e16.png"
+        },
+        {
+          "title": "Kem mịn Vinamilk dừa",
+          "path": "/products/kem-min-vinamilk-dua",
+          "image": "https://d8um25gjecm9v.cloudfront.net/cms/Shelf_KEM_Kem_hop_VNM_Dua_90_a96031772c_4c2d67026f.png"
+        }
+      ]
+    },
+    {
+      "name": "Nước ép & Trà",
+      "items": [
+        {
+          "title": "Nước ép kiwi táo collagen Vinamilk",
+          "path": "/products/nuoc-ep-kiwi-tao-collagen-vinamilk",
+          "image": "https://d8um25gjecm9v.cloudfront.net/cms/Shelf_NGK_Nuocep_Collagen_Kiwi_Tao_580fd40fa0_4cdfb57f66.png"
+        },
+        {
+          "title": "Trà atiso ít đường Vfresh",
+          "path": "/products/tra-atiso-it-duong-vfresh",
+          "image": "https://d8um25gjecm9v.cloudfront.net/cms/Shelf_NGK_Atiso_RID_1_L_48f7cef17f.png"
+        }
+      ]
+    }
+  ],
+  "blog_category_id": 790246133
+}

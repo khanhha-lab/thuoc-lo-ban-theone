@@ -16,3 +16,6 @@ __pycache__/
 .claude/skills/**/about.html
 .claude/skills/**/footer.html
 .claude/skills/**/product-images.json
+.claude/skills/**/blog-posts.json
+.claude/skills/**/cat_id.txt
+.claude/skills/**/project.json
