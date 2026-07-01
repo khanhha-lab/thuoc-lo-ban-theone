@@ -1,201 +1,177 @@
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Thước Lỗ Ban Online | Nội Thất The One</title>
-<meta name="description" content="Công cụ tra cứu thước lỗ ban online chuẩn phong thủy của Nội Thất The One. Đo kích thước nội thất, cửa, bàn thờ theo các cung tốt - xấu (52.2cm, 42.9cm, 38.8cm).">
-<link rel="icon" href="logo.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<!--
+  BẢN NHÚNG — dán trực tiếp vào khối "HTML/Code" của trang trên noithattheone.vn.
+  Toàn bộ CSS/JS được đặt tên riêng (tiền tố tlb-) và bọc trong 1 IIFE để không
+  đụng vào style/biến toàn cục sẵn có của website chính.
+
+  Cách dùng:
+  1) Tạo 1 trang mới trên site, ví dụ URL: /thuoc-lo-ban
+  2) Đặt Tiêu đề trang (SEO title) = "Thước Lỗ Ban Online | Nội Thất The One"
+     và Mô tả (meta description) = "Công cụ tra cứu thước lỗ ban online chuẩn
+     phong thủy của Nội Thất The One..." trong phần cài đặt SEO của trang đó.
+  3) Thêm 1 khối "HTML tùy chỉnh / Custom HTML / Raw HTML" vào nội dung trang,
+     dán TOÀN BỘ nội dung file này vào (bỏ dòng comment này cũng được, không bắt buộc).
+  4) Lưu & xem thử trang: gõ thử một số đo, nếu bảng kết quả hiện ra tức là
+     JavaScript chạy tốt. Nếu không thấy gì xảy ra khi gõ số — khối HTML bạn
+     dùng có thể đang lọc bỏ thẻ <script>; khi đó cần nhờ kỹ thuật đổi sang
+     đúng loại khối "HTML/Code" (không phải ô soạn thảo văn bản thông thường).
+-->
+<div id="tlb-root">
 <style>
-  :root{
-    --bg:#eef3fa;
-    --panel:#ffffff;
-    --ink:#102036;
-    --muted:#5f6e82;
-    --line:#dde6f1;
-    --brand:#004ea8;       /* xanh logo The One */
-    --brand-dark:#003d85;
-    --brand-2:#c8922e;     /* vàng đồng - điểm nhấn */
-    --good:#c0392b;        /* cung tốt (đỏ) */
-    --good-bg:#fdecea;
-    --bad:#2b2b2b;         /* cung xấu (đen) */
-    --bad-bg:#ecebea;
-    --warn:#8a5a00;
-    --warn-bg:#fbe9c9;
-    --radius:14px;
-    --shadow:0 10px 30px rgba(0,40,90,.10);
-    font-synthesis:none;
-  }
-  *{box-sizing:border-box}
-  html,body{margin:0;padding:0}
-  body{
-    background:var(--bg);
-    color:var(--ink);
-    font-family:"Mulish","Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
-    line-height:1.6;
-    -webkit-font-smoothing:antialiased;
-  }
-  a{color:var(--brand)}
-  .wrap{max-width:960px;margin:0 auto;padding:0 16px}
+#tlb-root{
+  --tlb-bg:#eef3fa;
+  --tlb-panel:#ffffff;
+  --tlb-ink:#102036;
+  --tlb-muted:#5f6e82;
+  --tlb-line:#dde6f1;
+  --tlb-brand:#004ea8;
+  --tlb-brand-dark:#003d85;
+  --tlb-brand-2:#c8922e;
+  --tlb-good:#c0392b;
+  --tlb-good-bg:#fdecea;
+  --tlb-bad:#2b2b2b;
+  --tlb-bad-bg:#ecebea;
+  --tlb-warn:#8a5a00;
+  --tlb-warn-bg:#fbe9c9;
+  --tlb-radius:14px;
+  --tlb-shadow:0 10px 30px rgba(0,40,90,.10);
+  font-synthesis:none;
+  background:var(--tlb-bg);
+  color:var(--tlb-ink);
+  font-family:"Mulish","Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  padding:24px 0 40px;
+}
+#tlb-root, #tlb-root *{box-sizing:border-box}
+#tlb-root a{color:var(--tlb-brand)}
+#tlb-root .wrap{max-width:960px;margin:0 auto;padding:0 16px}
 
-  /* Header */
-  header.site{
-    background:linear-gradient(180deg,#fff,#f2f7fc);
-    border-bottom:1px solid var(--line);
-  }
-  .topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 16px;max-width:960px;margin:0 auto}
-  .brand{display:flex;align-items:center;gap:13px;text-decoration:none;color:inherit}
-  .brand .logo{height:46px;width:auto;flex:none;display:block;border-radius:6px}
-  .brand b{display:block;font-size:16px;letter-spacing:.3px}
-  .brand small{display:block;color:var(--muted);font-size:11.5px;text-transform:uppercase;letter-spacing:.14em}
-  .topbar .back{font-size:13px;color:var(--muted);text-decoration:none}
-  .topbar .back:hover{color:var(--brand)}
+/* Hero */
+#tlb-root .hero{padding:6px 0 8px}
+#tlb-root .hero h1{font-size:clamp(24px,4.5vw,34px);margin:0 0 8px;letter-spacing:-.5px}
+#tlb-root .hero p{margin:0;color:var(--tlb-muted);max-width:62ch}
 
-  /* Hero */
-  .hero{padding:30px 0 8px}
-  .hero h1{font-size:clamp(24px,4.5vw,34px);margin:0 0 8px;letter-spacing:-.5px}
-  .hero p{margin:0;color:var(--muted);max-width:62ch}
+/* Input card */
+#tlb-root .card{background:var(--tlb-panel);border:1px solid var(--tlb-line);border-radius:var(--tlb-radius);box-shadow:var(--tlb-shadow)}
+#tlb-root .input-card{padding:20px;margin-top:20px}
+#tlb-root .input-row{display:flex;flex-wrap:wrap;gap:14px;align-items:flex-end}
+#tlb-root .field{flex:1 1 220px;min-width:200px}
+#tlb-root label.lbl{display:block;font-size:12.5px;font-weight:600;color:var(--tlb-muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:7px}
+#tlb-root .num-wrap{display:flex;align-items:stretch;border:1.5px solid var(--tlb-line);border-radius:11px;overflow:hidden;background:#fff;transition:border-color .15s}
+#tlb-root .num-wrap:focus-within{border-color:var(--tlb-brand-2)}
+#tlb-root .num-wrap input{flex:1;border:0;outline:0;font-size:22px;font-weight:700;padding:12px 14px;background:transparent;color:var(--tlb-ink);width:100%;min-width:0}
+#tlb-root .unit-toggle{display:flex;border-left:1px solid var(--tlb-line)}
+#tlb-root .unit-toggle button{border:0;background:#eef4fb;color:var(--tlb-muted);font-weight:700;font-size:13px;padding:0 13px;cursor:pointer;transition:.12s}
+#tlb-root .unit-toggle button+button{border-left:1px solid var(--tlb-line)}
+#tlb-root .unit-toggle button[aria-pressed="true"]{background:var(--tlb-brand);color:#fff}
+#tlb-root .hint{font-size:12.5px;color:var(--tlb-muted);margin-top:8px}
 
-  /* Input card */
-  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
-  .input-card{padding:20px;margin-top:20px}
-  .input-row{display:flex;flex-wrap:wrap;gap:14px;align-items:flex-end}
-  .field{flex:1 1 220px;min-width:200px}
-  label.lbl{display:block;font-size:12.5px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:7px}
-  .num-wrap{display:flex;align-items:stretch;border:1.5px solid var(--line);border-radius:11px;overflow:hidden;background:#fff;transition:border-color .15s}
-  .num-wrap:focus-within{border-color:var(--brand-2)}
-  .num-wrap input{flex:1;border:0;outline:0;font-size:22px;font-weight:700;padding:12px 14px;background:transparent;color:var(--ink);width:100%;min-width:0}
-  .unit-toggle{display:flex;border-left:1px solid var(--line)}
-  .unit-toggle button{border:0;background:#eef4fb;color:var(--muted);font-weight:700;font-size:13px;padding:0 13px;cursor:pointer;transition:.12s}
-  .unit-toggle button+button{border-left:1px solid var(--line)}
-  .unit-toggle button[aria-pressed="true"]{background:var(--brand);color:#fff}
-  .hint{font-size:12.5px;color:var(--muted);margin-top:8px}
+/* Results */
+#tlb-results{margin-top:8px}
 
-  /* Results */
-  #results{margin-top:8px}
+/* Summary / conclusion card */
+#tlb-root .summary-card{padding:18px 20px;margin-top:18px;border-top:4px solid var(--tlb-brand)}
+#tlb-root .summary-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px}
+#tlb-root .summary-title{font-weight:800;font-size:15.5px}
+#tlb-root .summary-text{margin:10px 0 10px;font-size:14px;color:#2a3b54}
+#tlb-root .summary-list{margin:0;padding-left:18px;font-size:13.5px;color:var(--tlb-muted);display:grid;gap:4px}
+#tlb-root .summary-list li b{font-weight:800}
+#tlb-root .summary-list li.ok b{color:var(--tlb-good)}
+#tlb-root .summary-list li.no b{color:var(--tlb-bad)}
 
-  /* Summary / conclusion card */
-  .summary-card{padding:18px 20px;margin-top:18px;border-top:4px solid var(--brand)}
-  .summary-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px}
-  .summary-title{font-weight:800;font-size:15.5px}
-  .summary-text{margin:10px 0 10px;font-size:14px;color:#2a3b54}
-  .summary-list{margin:0;padding-left:18px;font-size:13.5px;color:var(--muted);display:grid;gap:4px}
-  .summary-list li b{font-weight:800}
-  .summary-list li.ok b{color:var(--good)}
-  .summary-list li.no b{color:var(--bad)}
+#tlb-root .ruler-block{margin-top:14px;overflow:hidden}
+#tlb-root .ruler-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:15px 18px;border-bottom:1px solid var(--tlb-line);background:#f4f8fd;flex-wrap:wrap}
+#tlb-root .ruler-title b{font-size:16px}
+#tlb-root .ruler-title span{color:var(--tlb-muted);font-size:13px}
+#tlb-root .verdict{display:inline-flex;align-items:center;gap:8px;font-weight:800;font-size:14px;padding:7px 14px;border-radius:999px;white-space:nowrap}
+#tlb-root .verdict.good{color:#fff;background:var(--tlb-good)}
+#tlb-root .verdict.bad{color:#fff;background:var(--tlb-bad)}
+#tlb-root .verdict.warn{color:var(--tlb-warn);background:var(--tlb-warn-bg)}
+#tlb-root .verdict .dot{width:8px;height:8px;border-radius:50%;background:currentColor;opacity:.85}
 
-  .ruler-block{margin-top:14px;overflow:hidden}
-  .ruler-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:15px 18px;border-bottom:1px solid var(--line);background:#f4f8fd;flex-wrap:wrap}
-  .ruler-title b{font-size:16px}
-  .ruler-title span{color:var(--muted);font-size:13px}
-  .verdict{display:inline-flex;align-items:center;gap:8px;font-weight:800;font-size:14px;padding:7px 14px;border-radius:999px;white-space:nowrap}
-  .verdict.good{color:#fff;background:var(--good)}
-  .verdict.bad{color:#fff;background:var(--bad)}
-  .verdict.warn{color:var(--warn);background:var(--warn-bg)}
-  .verdict .dot{width:8px;height:8px;border-radius:50%;background:currentColor;opacity:.85}
+#tlb-root .ruler-body{padding:16px 18px}
+#tlb-root .meta-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:14px}
+#tlb-root .meta-grid .mi{background:#f4f8fd;border:1px solid var(--tlb-line);border-radius:11px;padding:10px 12px}
+#tlb-root .meta-grid .mi i{font-style:normal;display:block;font-size:11.5px;color:var(--tlb-muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px}
+#tlb-root .meta-grid .mi b{font-size:15px}
+#tlb-root .meaning{font-size:14px;color:#2a3b54;background:#f7fafe;border-left:3px solid var(--tlb-brand-2);padding:10px 14px;border-radius:0 8px 8px 0}
 
-  .ruler-body{padding:16px 18px}
-  .meta-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:14px}
-  .meta-grid .mi{background:#f4f8fd;border:1px solid var(--line);border-radius:11px;padding:10px 12px}
-  .meta-grid .mi i{font-style:normal;display:block;font-size:11.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px}
-  .meta-grid .mi b{font-size:15px}
-  .meaning{font-size:14px;color:#2a3b54;background:#f7fafe;border-left:3px solid var(--brand-2);padding:10px 14px;border-radius:0 8px 8px 0}
+/* Visual ruler */
+#tlb-root .scale{margin-top:16px}
+#tlb-root .scale-track{position:relative;display:flex;border-radius:9px;overflow:hidden;border:1px solid var(--tlb-line);height:64px}
+#tlb-root .seg{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;text-align:center;color:#fff;font-size:11px;font-weight:700;padding:4px 3px;line-height:1.2;overflow:hidden;border-right:1px solid rgba(255,255,255,.18)}
+#tlb-root .seg:last-child{border-right:0}
+#tlb-root .seg.good{background:linear-gradient(180deg,#d24a3b,#b5301f)}
+#tlb-root .seg.bad{background:linear-gradient(180deg,#3a3a3a,#222)}
+#tlb-root .seg.active{outline:3px solid var(--tlb-brand-2);outline-offset:-3px;z-index:2}
+#tlb-root .seg-name{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px}
+#tlb-root .seg small{opacity:.95;font-weight:800;display:inline-block;font-size:9px;letter-spacing:.06em;line-height:1;padding:3px 7px;border-radius:999px;background:rgba(255,255,255,.22)}
+#tlb-root .marker{position:absolute;top:-6px;bottom:-6px;width:2px;background:#1f6feb;z-index:5;pointer-events:none}
+#tlb-root .marker::before{content:"";position:absolute;top:-7px;left:50%;transform:translateX(-50%);border:6px solid transparent;border-top-color:#1f6feb}
+#tlb-root .scale-cap{display:flex;justify-content:space-between;font-size:11px;color:var(--tlb-muted);margin-top:6px}
 
-  /* Visual ruler */
-  .scale{margin-top:16px}
-  .scale-track{position:relative;display:flex;border-radius:9px;overflow:hidden;border:1px solid var(--line);height:64px}
-  .seg{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;text-align:center;color:#fff;font-size:11px;font-weight:700;padding:4px 3px;line-height:1.2;overflow:hidden;border-right:1px solid rgba(255,255,255,.18)}
-  .seg:last-child{border-right:0}
-  .seg.good{background:linear-gradient(180deg,#d24a3b,#b5301f)}
-  .seg.bad{background:linear-gradient(180deg,#3a3a3a,#222)}
-  .seg.active{outline:3px solid var(--brand-2);outline-offset:-3px;z-index:2}
-  .seg-name{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px}
-  .seg small{opacity:.95;font-weight:800;display:inline-block;font-size:9px;letter-spacing:.06em;line-height:1;padding:3px 7px;border-radius:999px;background:rgba(255,255,255,.22)}
-  .marker{position:absolute;top:-6px;bottom:-6px;width:2px;background:#1f6feb;z-index:5;pointer-events:none}
-  .marker::before{content:"";position:absolute;top:-7px;left:50%;transform:translateX(-50%);border:6px solid transparent;border-top-color:#1f6feb}
-  .scale-cap{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-top:6px}
+/* Suggestions */
+#tlb-root .suggest{margin-top:14px;font-size:13.5px}
+#tlb-root .suggest .ttl{font-weight:700;margin-bottom:8px;color:#2a3b54}
+#tlb-root .chips{display:flex;flex-wrap:wrap;gap:8px}
+#tlb-root .chip{border:1.5px solid var(--tlb-good);color:var(--tlb-good);background:var(--tlb-good-bg);border-radius:9px;padding:6px 11px;font-weight:700;cursor:pointer;font-size:13px;transition:.12s}
+#tlb-root .chip:hover{background:var(--tlb-good);color:#fff}
+#tlb-root .chip span{font-weight:500;opacity:.8;font-size:11.5px}
 
-  /* Suggestions */
-  .suggest{margin-top:14px;font-size:13.5px}
-  .suggest .ttl{font-weight:700;margin-bottom:8px;color:#2a3b54}
-  .chips{display:flex;flex-wrap:wrap;gap:8px}
-  .chip{border:1.5px solid var(--good);color:var(--good);background:var(--good-bg);border-radius:9px;padding:6px 11px;font-weight:700;cursor:pointer;font-size:13px;transition:.12s}
-  .chip:hover{background:var(--good);color:#fff}
-  .chip span{font-weight:500;opacity:.8;font-size:11.5px}
+#tlb-root .disclaimer{font-size:12px;color:var(--tlb-muted);margin-top:14px;font-style:italic}
 
-  .disclaimer{font-size:12px;color:var(--muted);margin-top:14px;font-style:italic}
+/* Info mini-cards (dùng trong mục "Cấu tạo") */
+#tlb-root .info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin:14px 0 6px}
+#tlb-root .info-grid .card{padding:16px}
+#tlb-root .info-grid.nested .card{box-shadow:none;border:1px solid var(--tlb-line)}
+#tlb-root .info-grid h3{margin:0 0 6px;font-size:15px;color:var(--tlb-brand)}
+#tlb-root .info-grid p{margin:0;font-size:13.5px;color:var(--tlb-muted)}
 
-  /* Info mini-cards (used inside "Cấu tạo" section) */
-  .info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin:14px 0 6px}
-  .info-grid .card{padding:16px}
-  .info-grid.nested .card{box-shadow:none;border:1px solid var(--line)}
-  .info-grid h3{margin:0 0 6px;font-size:15px;color:var(--brand)}
-  .info-grid p{margin:0;font-size:13.5px;color:var(--muted)}
+/* Article / nội dung SEO */
+#tlb-root .article{margin:34px 0 8px}
+#tlb-root .article-card{padding:24px 26px}
+#tlb-root .article h2{font-size:21px;margin:26px 0 10px;color:var(--tlb-brand);letter-spacing:-.3px}
+#tlb-root .article h2:first-child{margin-top:0}
+#tlb-root .article h3{font-size:16px;margin:18px 0 5px;color:var(--tlb-ink)}
+#tlb-root .article h4{font-size:14.5px;margin:16px 0 4px;color:var(--tlb-brand-dark)}
+#tlb-root .article p{margin:0 0 12px;color:#33425a;font-size:15px}
+#tlb-root .article ul{margin:0 0 14px;padding-left:20px;color:#33425a;font-size:15px}
+#tlb-root .article li{margin:5px 0}
+#tlb-root .article .lead{font-size:16px;color:var(--tlb-ink)}
+#tlb-root .note{background:#e9f1fc;border:1px solid #cfe0f4;border-left:4px solid var(--tlb-brand);border-radius:0 10px 10px 0;padding:13px 16px;font-size:14.5px;color:#2a3b54;margin:16px 0 2px}
 
-  /* Article / SEO content */
-  .article{margin:34px 0 8px}
-  .article-card{padding:24px 26px}
-  .article h2{font-size:21px;margin:26px 0 10px;color:var(--brand);letter-spacing:-.3px}
-  .article h2:first-child{margin-top:0}
-  .article h3{font-size:16px;margin:18px 0 5px;color:var(--ink)}
-  .article h4{font-size:14.5px;margin:16px 0 4px;color:var(--brand-dark)}
-  .article p{margin:0 0 12px;color:#33425a;font-size:15px}
-  .article ul{margin:0 0 14px;padding-left:20px;color:#33425a;font-size:15px}
-  .article li{margin:5px 0}
-  .article .lead{font-size:16px;color:var(--ink)}
-  .note{background:#e9f1fc;border:1px solid #cfe0f4;border-left:4px solid var(--brand);border-radius:0 10px 10px 0;padding:13px 16px;font-size:14.5px;color:#2a3b54;margin:16px 0 2px}
-  @media (max-width:560px){ .article-card{padding:18px 16px} }
+/* Bảng tra cứu ý nghĩa cung */
+#tlb-root .cung-table{width:100%;border-collapse:collapse;margin:10px 0 24px;font-size:13.5px}
+#tlb-root .cung-table caption{text-align:left;font-weight:800;color:var(--tlb-ink);padding:2px 0 8px;font-size:14.5px}
+#tlb-root .cung-table th,#tlb-root .cung-table td{border:1px solid var(--tlb-line);padding:8px 10px;text-align:left;vertical-align:top}
+#tlb-root .cung-table th{background:#f4f8fd;font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--tlb-muted);white-space:nowrap}
+#tlb-root .cung-table td.tag{white-space:nowrap;font-weight:800}
+#tlb-root .cung-table td.tag.good{color:var(--tlb-good)}
+#tlb-root .cung-table td.tag.bad{color:var(--tlb-bad)}
+#tlb-root .cung-table .subs{color:var(--tlb-muted);font-size:12.5px}
 
-  /* Reference tables (cung meanings) */
-  .cung-table{width:100%;border-collapse:collapse;margin:10px 0 24px;font-size:13.5px}
-  .cung-table caption{text-align:left;font-weight:800;color:var(--ink);padding:2px 0 8px;font-size:14.5px}
-  .cung-table th,.cung-table td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
-  .cung-table th{background:#f4f8fd;font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);white-space:nowrap}
-  .cung-table td.tag{white-space:nowrap;font-weight:800}
-  .cung-table td.tag.good{color:var(--good)}
-  .cung-table td.tag.bad{color:var(--bad)}
-  .cung-table .subs{color:var(--muted);font-size:12.5px}
-  @media (max-width:560px){ .cung-table{font-size:12.5px} .cung-table th,.cung-table td{padding:6px 7px} }
-
-  footer.site{border-top:1px solid var(--line);margin-top:30px;padding:22px 0;color:var(--muted);font-size:13px;background:#f2f7fc}
-  footer .wrap{display:flex;flex-wrap:wrap;gap:8px;justify-content:space-between;align-items:center}
-
-  @media (max-width:560px){
-    .seg{font-size:9px}
-    .seg small{display:none}
-    .num-wrap input{font-size:19px}
-  }
+@media (max-width:560px){
+  #tlb-root .article-card{padding:18px 16px}
+  #tlb-root .cung-table{font-size:12.5px}
+  #tlb-root .cung-table th,#tlb-root .cung-table td{padding:6px 7px}
+  #tlb-root .seg{font-size:9px}
+  #tlb-root .seg small{display:none}
+  #tlb-root .num-wrap input{font-size:19px}
+}
 </style>
-</head>
-<body>
-<header class="site">
-  <div class="topbar">
-    <a class="brand" href="https://noithattheone.vn/" target="_blank" rel="noopener">
-      <img class="logo" src="logo.png" alt="Nội Thất The One" width="95" height="46">
-      <span>
-        <b>Nội Thất The One</b>
-        <small>Thước Lỗ Ban Online</small>
-      </span>
-    </a>
-    <a class="back" href="https://noithattheone.vn/" target="_blank" rel="noopener">← Về website</a>
-  </div>
-</header>
 
-<main class="wrap">
+<div class="wrap">
   <section class="hero">
     <h1>Tra cứu Thước Lỗ Ban</h1>
-    <p>Nhập kích thước cần đo để kiểm tra rơi vào <strong style="color:var(--good)">cung tốt (đỏ)</strong> hay <strong>cung xấu (đen)</strong> theo phong thủy. Áp dụng cho nội thất, cửa, bàn thờ và các hạng mục xây dựng.</p>
+    <p>Nhập kích thước cần đo để kiểm tra rơi vào <strong style="color:var(--tlb-good)">cung tốt (đỏ)</strong> hay <strong>cung xấu (đen)</strong> theo phong thủy. Áp dụng cho nội thất, cửa, bàn thờ và các hạng mục xây dựng.</p>
   </section>
 
   <div class="card input-card">
     <div class="input-row">
       <div class="field">
-        <label class="lbl" for="value">Kích thước cần đo</label>
+        <label class="lbl" for="tlb-value">Kích thước cần đo</label>
         <div class="num-wrap">
-          <input id="value" type="number" inputmode="decimal" min="0" step="1" placeholder="Ví dụ: 810" autocomplete="off">
+          <input id="tlb-value" type="number" inputmode="decimal" min="0" step="1" placeholder="Ví dụ: 810" autocomplete="off">
           <div class="unit-toggle" role="group" aria-label="Đơn vị">
             <button type="button" data-unit="mm" aria-pressed="true">mm</button>
             <button type="button" data-unit="cm" aria-pressed="false">cm</button>
@@ -207,7 +183,7 @@
     </div>
   </div>
 
-  <section id="results" aria-live="polite"></section>
+  <section id="tlb-results" aria-live="polite"></section>
   <p class="disclaimer">* Quy ước màu: cung đỏ là cát lợi (nên chọn), cung đen là hung (nên tránh). Màu sắc xác định theo cung lớn; kết quả hiển thị kèm tên phân cung và ý nghĩa. Công cụ mang tính tham khảo phong thủy, không thay thế tính toán kết cấu — công năng và an toàn xây dựng vẫn cần ưu tiên hàng đầu.</p>
 
   <section class="article guide">
@@ -217,7 +193,7 @@
       <ul>
         <li><strong>Bước 1:</strong> Chọn đơn vị (mm, cm hoặc m) và nhập kích thước thực tế cần kiểm tra.</li>
         <li><strong>Bước 2:</strong> Xem <em>Kết luận chung</em> ngay phía trên — cho biết kích thước này tốt hay chưa tốt, và tốt cho hạng mục nào.</li>
-        <li><strong>Bước 3:</strong> Xem chi tiết trên cả ba loại thước. Mỗi thước hiển thị cung lớn, phân cung và đánh giá <strong style="color:var(--good)">Tốt (đỏ)</strong> hay <strong>Xấu (đen)</strong> kèm ý nghĩa.</li>
+        <li><strong>Bước 3:</strong> Xem chi tiết trên cả ba loại thước. Mỗi thước hiển thị cung lớn, phân cung và đánh giá <strong style="color:var(--tlb-good)">Tốt (đỏ)</strong> hay <strong>Xấu (đen)</strong> kèm ý nghĩa.</li>
         <li><strong>Bước 4:</strong> Ưu tiên loại thước phù hợp với hạng mục đang đo (ví dụ đồ nội thất → xem thước 38.8cm).</li>
         <li><strong>Bước 5:</strong> Nếu kích thước rơi vào cung xấu, bấm vào gợi ý <strong>"Kích thước đẹp gần nhất"</strong> để chọn số đo cát lợi gần với mong muốn của bạn.</li>
       </ul>
@@ -229,7 +205,7 @@
     <div class="card article-card">
       <h2>Giới thiệu thước lỗ ban</h2>
       <p class="lead">Thước lỗ ban là loại thước phong thủy dùng để đo đạc và lựa chọn kích thước cát lợi trong xây dựng, làm nhà và đóng đồ nội thất. Tương truyền thước do <strong>Lỗ Ban</strong> — ông tổ nghề mộc và nghề xây dựng của Trung Hoa cổ đại — sáng tạo ra, nên được gọi theo tên ông.</p>
-      <p>Khác với thước đo thông thường chỉ cho biết chiều dài, thước lỗ ban chia chiều dài đó thành các "cung" mang ý nghĩa cát (tốt) hoặc hung (xấu), được quy ước bằng màu sắc: <strong style="color:var(--good)">cung đỏ là tốt</strong> — nên chọn; <strong>cung đen là xấu</strong> — nên tránh. Khi kích thước rơi vào cung đỏ, gia chủ được cho là sẽ gặp nhiều may mắn, tài lộc và bình an; ngược lại rơi vào cung đen dễ gặp hao tổn, bệnh tật hoặc trắc trở.</p>
+      <p>Khác với thước đo thông thường chỉ cho biết chiều dài, thước lỗ ban chia chiều dài đó thành các "cung" mang ý nghĩa cát (tốt) hoặc hung (xấu), được quy ước bằng màu sắc: <strong style="color:var(--tlb-good)">cung đỏ là tốt</strong> — nên chọn; <strong>cung đen là xấu</strong> — nên tránh. Khi kích thước rơi vào cung đỏ, gia chủ được cho là sẽ gặp nhiều may mắn, tài lộc và bình an; ngược lại rơi vào cung đen dễ gặp hao tổn, bệnh tật hoặc trắc trở.</p>
       <p>Tại Việt Nam, thước lỗ ban đã trở thành công cụ quen thuộc với thợ mộc, thợ xây, kiến trúc sư và cả gia chủ khi lên phương án kích thước cho nhà ở, văn phòng. Đây là yếu tố tham khảo phong thủy, nên dùng song song — chứ không thay thế — các tiêu chuẩn về kết cấu, công năng và an toàn xây dựng.</p>
 
       <h2>Cấu tạo thước lỗ ban</h2>
@@ -252,7 +228,7 @@
 
       <h2>Giải mã ý nghĩa các thông số chuẩn trên thước lỗ ban phong thủy</h2>
       <p>Mỗi cung trên thước lỗ ban gắn với một tên gọi và một lời luận giải cát/hung riêng — đây chính là phần "thông số chuẩn" mà công cụ phía trên tự động tra cho bạn. Bảng dưới đây liệt kê đầy đủ các cung lớn, tính chất và ý nghĩa của cả 3 loại thước để bạn tham khảo hoặc đối chiếu thủ công:</p>
-      <div id="cungTableWrap"></div>
+      <div id="tlb-cung-table"></div>
 
       <h2>Các số đo thước lỗ ban đẹp</h2>
       <p>Bên cạnh việc tra từng kích thước cụ thể bằng công cụ phía trên, dưới đây là một số kích thước "đẹp" (rơi vào cung đỏ) được sử dụng phổ biến trong dân gian mà bạn có thể tham khảo nhanh. Lưu ý các mốc dưới chỉ mang tính tổng hợp phổ biến — vạch cung có thể lệch vài mm tùy thước, nên vẫn cần kiểm tra lại kích thước chính xác của công trình bằng công cụ ở trên.</p>
@@ -285,21 +261,17 @@
       <p>Trong thực tế, kích thước lỗ ban chỉ là một trong nhiều yếu tố phong thủy của ngôi nhà, cần được xem xét cùng hướng nhà, tuổi gia chủ và bố cục tổng thể theo bát trạch, ngũ hành. Với các dự án nội thất trường học, công ty, doanh nghiệp, quý khách có nhu cầu đóng mới bàn ghế, tủ kệ theo kích thước lỗ ban phù hợp có thể liên hệ <a href="https://noithattheone.vn/" target="_blank" rel="noopener">noithattheone.vn</a> để được đội ngũ và các đại lý phân phối của The One tư vấn phương án cụ thể.</p>
     </div>
   </section>
-</main>
-
-<footer class="site">
-  <div class="wrap">
-    <span>© <span id="yr"></span> Nội Thất The One — Sản xuất nội thất trường học, văn phòng, doanh nghiệp.</span>
-    <a href="https://noithattheone.vn/" target="_blank" rel="noopener">noithattheone.vn</a>
-  </div>
-</footer>
+</div>
+</div>
 
 <script>
+(function(){
 "use strict";
+const root = document.getElementById("tlb-root");
+if (!root) return;
+
 /* ============================================================
    DỮ LIỆU THƯỚC LỖ BAN
-   Mỗi thước: chiều dài chu kỳ (mm), danh sách cung lớn theo thứ tự.
-   Mỗi cung lớn: tên, good (true=tốt/đỏ, false=xấu/đen), ý nghĩa, các phân cung.
    ============================================================ */
 const RULERS = [
   {
@@ -357,7 +329,6 @@ const RULERS = [
   }
 ];
 
-/* ---------- Logic tính cung ---------- */
 function lookup(ruler, mm){
   const cycle = ruler.cycle;
   const nSub = ruler.cungs.reduce((s,c)=>s+c.subs.length,0);
@@ -367,7 +338,6 @@ function lookup(ruler, mm){
   const cycleIndex = Math.floor(mm / cycle);
   let subIdx = Math.floor(rem / subW);
   if (subIdx >= nSub) subIdx = nSub - 1;
-  // tìm cung lớn chứa subIdx
   let acc = 0, cungIdx = 0, subInCung = 0;
   for (let i=0;i<ruler.cungs.length;i++){
     const len = ruler.cungs[i].subs.length;
@@ -382,7 +352,6 @@ function lookup(ruler, mm){
   };
 }
 
-/* tìm các kích thước tốt gần nhất (mm) */
 function nearestGood(ruler, mm, count){
   const res = [];
   const seen = new Set();
@@ -398,9 +367,8 @@ function nearestGood(ruler, mm, count){
   return res.slice(0,count).sort((a,b)=>a.mm-b.mm);
 }
 
-/* ---------- Bảng tra cứu ý nghĩa cung (mục "Giải mã ý nghĩa") ---------- */
 function buildCungTables(){
-  const wrap = document.getElementById("cungTableWrap");
+  const wrap = document.getElementById("tlb-cung-table");
   if (!wrap) return;
   let html = "";
   RULERS.forEach(r=>{
@@ -414,16 +382,14 @@ function buildCungTables(){
   wrap.innerHTML = html;
 }
 
-/* ---------- Render ---------- */
-const resultsEl = document.getElementById("results");
-const valueEl = document.getElementById("value");
+const resultsEl = document.getElementById("tlb-results");
+const valueEl = document.getElementById("tlb-value");
 let unit = "mm";
 
 function toMM(v){ return unit==="mm"? v : unit==="cm"? v*10 : v*1000; }
 function fmtMM(mm){
-  // hiển thị mm và cm
   const cm = mm/10;
-  return `${mm.toLocaleString("vi-VN")} mm <span style="color:var(--muted);font-weight:500">(${cm.toLocaleString("vi-VN",{maximumFractionDigits:2})} cm)</span>`;
+  return `${mm.toLocaleString("vi-VN")} mm <span style="color:var(--tlb-muted);font-weight:500">(${cm.toLocaleString("vi-VN",{maximumFractionDigits:2})} cm)</span>`;
 }
 
 function segHTML(ruler, active){
@@ -434,7 +400,6 @@ function segHTML(ruler, active){
     const cls = (c.good?"good":"bad") + (ci===active.cungIdx?" active":"");
     html += `<div class="seg ${cls}" style="flex:0 0 ${w}%"><span class="seg-name">${c.name}</span><small>${c.good?"Tốt":"Xấu"}</small></div>`;
   });
-  // marker theo vị trí rem
   const left = (active.rem/ruler.cycle*100).toFixed(3);
   html += `<div class="marker" style="left:${left}%"></div>`;
   html += '</div>';
@@ -442,7 +407,6 @@ function segHTML(ruler, active){
   return html;
 }
 
-/* Kết luận tổng hợp cho kích thước vừa nhập */
 function summaryHTML(mm, evals){
   const total = evals.length;
   const goodCount = evals.filter(e=>e.res.good).length;
@@ -480,7 +444,7 @@ function summaryHTML(mm, evals){
 function render(){
   const raw = parseFloat(valueEl.value);
   if (isNaN(raw) || raw<=0){
-    resultsEl.innerHTML = `<div class="card input-card" style="margin-top:18px;color:var(--muted)">Nhập một kích thước lớn hơn 0 để xem kết quả tra cứu.</div>`;
+    resultsEl.innerHTML = `<div class="card input-card" style="margin-top:18px;color:var(--tlb-muted)">Nhập một kích thước lớn hơn 0 để xem kết quả tra cứu.</div>`;
     return;
   }
   const mm = Math.round(toMM(raw)*1000)/1000;
@@ -500,23 +464,21 @@ function render(){
         <div class="meta-grid">
           <div class="mi"><i>Cung lớn</i><b>${res.cung.name}</b></div>
           <div class="mi"><i>Phân cung</i><b>${res.subName}</b></div>
-          <div class="mi"><i>Chu kỳ thứ</i><b>${res.cycleIndex} &nbsp;<span style="color:var(--muted);font-weight:500;font-size:12px">(dư ${(res.rem).toFixed(1)} mm)</span></b></div>
+          <div class="mi"><i>Chu kỳ thứ</i><b>${res.cycleIndex} &nbsp;<span style="color:var(--tlb-muted);font-weight:500;font-size:12px">(dư ${(res.rem).toFixed(1)} mm)</span></b></div>
         </div>
         <div class="meaning">${res.cung.meaning}</div>
         ${segHTML(r, res)}
         ${ sugg.length ? `<div class="suggest"><div class="ttl">Kích thước đẹp gần nhất (bấm để chọn):</div><div class="chips">${
             sugg.map(s=>`<button type="button" class="chip" data-mm="${s.mm}">${s.mm.toLocaleString("vi-VN")} mm <span>(${s.diff>0?'+':''}${s.diff})</span></button>`).join("")
-          }</div></div>` : `<div class="suggest"><div class="ttl" style="color:var(--good)">✔ Kích thước này đã đẹp theo thước ${r.name.replace('Thước ','')}.</div></div>` }
+          }</div></div>` : `<div class="suggest"><div class="ttl" style="color:var(--tlb-good)">✔ Kích thước này đã đẹp theo thước ${r.name.replace('Thước ','')}.</div></div>` }
       </div>
     </div>`;
   });
   resultsEl.innerHTML = html;
 
-  // gắn sự kiện cho chip gợi ý
   resultsEl.querySelectorAll(".chip").forEach(ch=>{
     ch.addEventListener("click", ()=>{
       const v = parseFloat(ch.dataset.mm);
-      // chuyển về đơn vị đang chọn
       valueEl.value = unit==="mm"? v : unit==="cm"? v/10 : v/1000;
       render();
       resultsEl.scrollIntoView({behavior:"smooth", block:"start"});
@@ -524,12 +486,10 @@ function render(){
   });
 }
 
-/* ---------- Sự kiện ---------- */
 valueEl.addEventListener("input", render);
-document.querySelectorAll(".unit-toggle button").forEach(b=>{
+root.querySelectorAll(".unit-toggle button").forEach(b=>{
   b.addEventListener("click", ()=>{
     const newUnit = b.dataset.unit;
-    // chuyển đổi giá trị hiện tại sang đơn vị mới để giữ nguyên kích thước thực
     const cur = parseFloat(valueEl.value);
     if(!isNaN(cur)){
       const mm = toMM(cur);
@@ -538,16 +498,13 @@ document.querySelectorAll(".unit-toggle button").forEach(b=>{
     } else {
       unit = newUnit;
     }
-    document.querySelectorAll(".unit-toggle button").forEach(x=>x.setAttribute("aria-pressed", x===b?"true":"false"));
+    root.querySelectorAll(".unit-toggle button").forEach(x=>x.setAttribute("aria-pressed", x===b?"true":"false"));
     render();
   });
 });
 
-document.getElementById("yr").textContent = new Date().getFullYear();
 buildCungTables();
-// giá trị mẫu
 valueEl.value = 810;
 render();
+})();
 </script>
-</body>
-</html>
